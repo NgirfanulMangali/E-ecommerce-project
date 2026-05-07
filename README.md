@@ -22,7 +22,8 @@ For selling clothes e-commerce platform
 - Cart
 - Simple Checkout (without payment)
 
-
+## Database Architecture
+![Database Schema]([View on Eraser![](https://app.eraser.io/workspace/v9j9C4fwfOCaJBzsIQ7d/preview?elements=k02NvLWYGwLZBPCo4dp-dA&type=embed)](https://app.eraser.io/workspace/v9j9C4fwfOCaJBzsIQ7d?elements=k02NvLWYGwLZBPCo4dp-dA))
 
 
 
