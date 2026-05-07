@@ -22,5 +22,5 @@ For selling clothes e-commerce platform
 - Cart
 - Simple Checkout (without payment)
 
-## Database Architecture
-image.png
+### Database Architecture
+![Database Design](./assets/diagram-export-5-7-2026-8_26_23-PM.svg)
