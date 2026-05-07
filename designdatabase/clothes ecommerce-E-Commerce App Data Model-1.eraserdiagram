@@ -1,0 +1,44 @@
+entity-relationship-diagram
+
+title E-Commerce App Data Model
+
+users [icon: user, color: blue] {
+  id string pk
+  email string
+  password string
+  name string
+  createdAt timestamp
+}
+
+products [icon: package, color: green] {
+  id string pk
+  name string
+  description string
+  price decimal
+  imageUrl string
+  stock int
+  categoryId string
+}
+
+categories [icon: tag, color: purple] {
+  id string pk
+  name string
+}
+
+carts [icon: shopping-cart, color: orange] {
+  id string pk
+  userId string
+  createdAt timestamp
+}
+
+cart_items [icon: list, color: yellow] {
+  id string pk
+  cartId string
+  productId string
+  quantity int
+}
+
+users.id - carts.userId
+carts.id < cart_items.cartId
+products.id < cart_items.productId
+categories.id < products.categoryId
