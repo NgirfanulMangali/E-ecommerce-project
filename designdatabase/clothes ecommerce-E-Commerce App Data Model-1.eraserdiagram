@@ -20,10 +20,6 @@ products [icon: package, color: green] {
   categoryId string
 }
 
-categories [icon: tag, color: purple] {
-  id string pk
-  name string
-}
 
 carts [icon: shopping-cart, color: orange] {
   id string pk
@@ -41,4 +37,3 @@ cart_items [icon: list, color: yellow] {
 users.id - carts.userId
 carts.id < cart_items.cartId
 products.id < cart_items.productId
-categories.id < products.categoryId

@@ -6,7 +6,7 @@
 <!-- eraser-additional-content -->
 ## Diagrams
 <!-- eraser-additional-files -->
-<a href="/designdatabase/clothes ecommerce-E-Commerce App Data Model-1.eraserdiagram" data-element-id="2zy6Fc8O8gtX4pfXEEt7"><img src="/.eraser/v9j9C4fwfOCaJBzsIQ7d___gn2n3hcGdfNeMoZELb4qhOD7zKJ2___---diagram----eb7a9fa4f9f1952c70e6ba63d12518ed-E-Commerce-App-Data-Model.png" alt="" data-element-id="2zy6Fc8O8gtX4pfXEEt7" /></a>
+<a href="/designdatabase/clothes ecommerce-E-Commerce App Data Model-1.eraserdiagram" data-element-id="2zy6Fc8O8gtX4pfXEEt7"><img src="/.eraser/v9j9C4fwfOCaJBzsIQ7d___gn2n3hcGdfNeMoZELb4qhOD7zKJ2___---diagram----b865e8f4d5e6e50f0acd975ceeda999e-E-Commerce-App-Data-Model.png" alt="" data-element-id="2zy6Fc8O8gtX4pfXEEt7" /></a>
 <!-- end-eraser-additional-files -->
 <!-- end-eraser-additional-content -->
 <!--- Eraser file: https://app.eraser.io/workspace/v9j9C4fwfOCaJBzsIQ7d --->
