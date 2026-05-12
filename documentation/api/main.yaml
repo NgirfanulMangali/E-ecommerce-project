@@ -1,0 +1,15 @@
+openapi: 3.0.3
+info:
+  title: E-commerce API
+  version: 1.0.0
+  description: Dokumentasi API untuk proyek E-commerce.
+servers:
+  - url: http://localhost:5000
+components:
+  schemas:
+    User:
+      $ref: ./schemas/User.yaml#/User
+    UserCreateRequest:
+      $ref: ./schemas/User.yaml#/UserCreateRequest
+    Product:
+      $ref: ./schemas/Product.yaml#/Product

@@ -1,0 +1,54 @@
+User:
+  type: object
+  additionalProperties: false
+  description: User entity (tabel `users`).
+  required:
+    - id
+    - email
+    - name
+    - createdAt
+  properties:
+    id:
+      type: string
+      description: Primary key user.
+      example: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+    email:
+      type: string
+      format: email
+      description: Email user (unik).
+      example: "user@example.com"
+    name:
+      type: string
+      description: Nama user.
+      example: "Zoro Tokyo"
+    createdAt:
+      type: string
+      format: date-time
+      description: Waktu pembuatan user.
+      example: "2026-05-12T09:21:00.000Z"
+
+UserCreateRequest:
+  type: object
+  additionalProperties: false
+  description: Payload untuk membuat user baru.
+  required:
+    - email
+    - password
+    - name
+  properties:
+    email:
+      type: string
+      format: email
+      description: Email user (unik).
+      example: "user@example.com"
+    password:
+      type: string
+      format: password
+      description: Password plaintext dari client (akan di-hash oleh server).
+      minLength: 8
+      example: "P@ssw0rd123"
+    name:
+      type: string
+      description: Nama user.
+      minLength: 1
+      example: "Zoro Tokyo"

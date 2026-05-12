@@ -1,0 +1,41 @@
+Product:
+  type: object
+  additionalProperties: false
+  description: Product entity.
+  required:
+    - id
+    - name
+    - description
+    - price
+    - imageUrl
+    - stock
+  properties:
+    id:
+      type: string
+      description: Primary key product.
+      example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+    name:
+      type: string
+      description: Nama produk.
+      minLength: 1
+      example: "Wireless Mouse"
+    description:
+      type: string
+      description: Deskripsi produk.
+      minLength: 1
+      example: "Mouse wireless ergonomic dengan koneksi 2.4GHz."
+    price:
+      type: integer
+      description: Harga produk.
+      minimum: 0
+      example: 149999
+    imageUrl:
+      type: string
+      format: uri
+      description: URL gambar produk.
+      example: "https://example.com/images/wireless-mouse.jpg"
+    stock:
+      type: integer
+      description: Jumlah stok produk.
+      minimum: 0
+      example: 25
