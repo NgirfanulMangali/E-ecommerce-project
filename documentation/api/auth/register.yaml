@@ -1,0 +1,73 @@
+post:
+  security: []
+  tags:
+    - Auth
+  summary: Registrasi user baru
+  description: |
+    Membuat akun baru dengan email, password, dan nama.
+    Email harus unik dan password akan di-hash di server.
+    Response dapat mengembalikan JWT jika auto-login diaktifkan.
+
+  operationId: register
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ../schemas/User.yaml#/UserCreateRequest
+        examples:
+          default:
+            value:
+              email: user@example.com
+              password: P@ssw0rd123
+              name: Zoro Tokyo
+
+  responses:
+    "201":
+      description: Registrasi berhasil
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            required:
+              - message
+              - data
+            properties:
+              message:
+                type: string
+                example: Registrasi berhasil
+              data:
+                type: object
+                additionalProperties: false
+                properties:
+                  user:
+                    $ref: ../schemas/User.yaml#/User
+                  token:
+                    type: string
+                    description: JWT (opsional jika auto-login)
+                  expiresIn:
+                    type: integer
+                    description: Masa berlaku token dalam detik
+
+    "400":
+      description: Validation error
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+    "409":
+      description: Email sudah terdaftar
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+    "500":
+      description: Server error
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse

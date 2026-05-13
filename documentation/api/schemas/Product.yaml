@@ -9,6 +9,7 @@ Product:
     - price
     - imageUrl
     - stock
+    - categoryId
   properties:
     id:
       type: string
@@ -39,3 +40,7 @@ Product:
       description: Jumlah stok produk.
       minimum: 0
       example: 25
+    categoryId:
+      type: string
+      description: ID kategori produk (foreign key ke kategori).
+      example: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"

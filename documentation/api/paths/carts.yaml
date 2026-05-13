@@ -1,0 +1,346 @@
+/carts/me:
+  get:
+    tags:
+      - Carts
+    summary: Lihat keranjang aktif user
+    description: Mengembalikan isi keranjang aktif milik user yang sedang login.
+    operationId: getMyCart
+    
+    responses:
+      "200":
+        description: Keranjang berhasil diambil.
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+              required:
+                - data
+              properties:
+                data:
+                  type: object
+                  additionalProperties: false
+                  required:
+                    - id
+                    - userId
+                    - items
+                  properties:
+                    id:
+                      type: string
+                      example: "crt_01J1A2B3C4D5E6F7G8H9I0JKL"
+
+                    userId:
+                      type: string
+                      example: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+
+                    items:
+                      type: array
+                      items:
+                        type: object
+                        additionalProperties: false
+                        required:
+                          - id
+                          - productId
+                          - quantity
+                          - product
+                        properties:
+                          id:
+                            type: string
+                            example: "cit_01J1A2B3C4D5E6F7G8H9I0JKL"
+
+                          productId:
+                            type: string
+                            example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+                          quantity:
+                            type: integer
+                            minimum: 1
+                            example: 2
+
+                          product:
+                            $ref: ../schemas/Product.yaml#/Product
+
+            examples:
+              default:
+                summary: Contoh respons
+                value:
+                  data:
+                    id: "crt_01J1A2B3C4D5E6F7G8H9I0JKL"
+                    userId: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+
+                    items:
+                      - id: "cit_01J1A2B3C4D5E6F7G8H9I0JKL"
+                        productId: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                        quantity: 2
+
+                        product:
+                          id: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                          name: "Wireless Mouse"
+                          description: "Mouse wireless ergonomic dengan koneksi 2.4GHz."
+                          price: 149999
+                          imageUrl: "https://example.com/images/wireless-mouse.jpg"
+                          stock: 25
+                          categoryId: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+
+      "401":
+        description: User belum login.
+        content:
+          application/json:
+            schema:
+              $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+      "500":
+        description: Kesalahan server internal.
+        content:
+          application/json:
+            schema:
+             $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+/carts/me/items:
+  post:
+    tags:
+      - Carts
+
+    summary: Tambah produk ke keranjang
+
+    description: >
+      Menambahkan produk ke keranjang user yang sedang login.
+      Jika produk sudah ada di keranjang, kuantitas akan ditambahkan.
+
+    operationId: addCartItem
+
+
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+
+            required:
+              - productId
+              - quantity
+
+            properties:
+              productId:
+                type: string
+                minLength: 1
+                example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+              quantity:
+                type: integer
+                minimum: 1
+                example: 1
+
+    responses:
+      "201":
+        description: Item berhasil ditambahkan ke keranjang.
+
+        content:
+          application/json:
+            schema:
+              type: object
+              additionalProperties: false
+
+              required:
+                - message
+                - data
+
+              properties:
+                message:
+                  type: string
+                  example: "Item ditambahkan ke keranjang."
+
+                data:
+                  type: object
+                  additionalProperties: false
+
+                  required:
+                    - id
+                    - productId
+                    - quantity
+
+                  properties:
+                    id:
+                      type: string
+                      example: "cit_01J1A2B3C4D5E6F7G8H9I0JKL"
+
+                    productId:
+                      type: string
+                      example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+                    quantity:
+                      type: integer
+                      minimum: 1
+                      example: 1
+
+      "401":
+        description: User belum login.
+
+        content:
+          application/json:
+            schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+      "500":
+        description: Kesalahan server internal.
+
+        content:
+          application/json:
+            schema:
+             $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+/carts/me/items/{cartItemId}:
+  patch:
+    tags:
+      - Carts
+    summary: Ubah jumlah item di keranjang
+    description: |
+      Mengubah kuantitas item tertentu yang sudah ada di keranjang user.
+      Jika quantity = 0, item akan dihapus dari keranjang.
+    operationId: updateCartItemQuantity
+
+    parameters:
+      - name: cartItemId
+        in: path
+        required: true
+        description: ID item keranjang.
+        schema:
+          type: string
+          example: "cartItem_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+            required:
+              - quantity
+            properties:
+              quantity:
+                type: integer
+                minimum: 0
+                description: |
+                  Jumlah produk dalam keranjang.
+                  Gunakan 0 untuk menghapus item dari keranjang.
+                example: 3
+
+    responses:
+      "200":
+        description: Item keranjang berhasil diperbarui.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - message
+                - data
+              properties:
+                message:
+                  type: string
+                  example: "Item keranjang berhasil diperbarui."
+                data:
+                  type: object
+                  required:
+                    - cartItemId
+                    - productId
+                    - quantity
+                  properties:
+                    cartItemId:
+                      type: string
+                      example: "cartItem_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                    productId:
+                      type: string
+                      example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                    quantity:
+                      type: integer
+                      example: 3
+
+      "400":
+        description: Request tidak valid.
+        content:
+          application/json:
+            schema:
+             $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+      "401":
+        description: User belum login atau token tidak valid.
+        content:
+          application/json:
+            schema:
+             $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+      "404":
+        description: Item keranjang tidak ditemukan.
+        content:
+          application/json:
+            schema:
+              $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+      "500":
+        description: Kesalahan server internal.
+        content:
+          application/json:
+            schema:
+              $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+  delete:
+  tags:
+    - Carts
+  summary: Hapus item dari keranjang
+  description: Menghapus satu item dari keranjang user berdasarkan `cartItemId`.
+  operationId: removeCartItem
+
+  parameters:
+    - name: cartItemId
+      in: path
+      required: true
+      description: ID item keranjang yang ingin dihapus.
+      schema:
+        type: string
+        example: "cartItem_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+  responses:
+    "200":
+      description: Item berhasil dihapus dari keranjang.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: "Item berhasil dihapus dari keranjang."
+
+    "400":
+      description: Request tidak valid.
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+    "401":
+      description: User belum login.
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+    "404":
+      description: Item tidak ditemukan di keranjang.
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+    "500":
+      description: Kesalahan server internal.
+      content:
+        application/json:
+          schema:
+            $ref: ../main.yaml#/components/schemas/ErrorResponse

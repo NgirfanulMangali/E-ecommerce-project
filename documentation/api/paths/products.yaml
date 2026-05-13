@@ -1,0 +1,153 @@
+/products:
+  get:
+    security: []
+    tags:
+      - Products
+    summary: Daftar produk
+    description: |
+      Mengembalikan daftar produk yang tersedia. Mendukung paginasi opsional dan
+      filter berdasarkan kategori (sesuai model data `categoryId` pada produk).
+    operationId: listProducts
+    parameters:
+      - name: page
+        in: query
+        description: Nomor halaman (mulai dari 1).
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          default: 1
+          example: 1
+      - name: limit
+        in: query
+        description: Jumlah item per halaman.
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+          maximum: 100
+          default: 20
+          example: 20
+      - name: categoryId
+        in: query
+        description: Filter produk berdasarkan ID kategori.
+        required: false
+        schema:
+          type: string
+          example: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+    responses:
+      "200":
+        description: Daftar produk berhasil diambil.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  type: array
+                  items:
+                    $ref: ../schemas/Product.yaml#/Product
+                meta:
+                  type: object
+                  description: Metadata paginasi (opsional, jika server mengimplementasikan).
+                  properties:
+                    page:
+                      type: integer
+                      example: 1
+                    limit:
+                      type: integer
+                      example: 20
+                    total:
+                      type: integer
+                      description: Total seluruh produk yang cocok dengan filter.
+                      example: 42
+            examples:
+              default:
+                summary: Contoh respons
+                value:
+                  data:
+                    - id: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                      name: "Wireless Mouse"
+                      description: "Mouse wireless ergonomic dengan koneksi 2.4GHz."
+                      price: 149999
+                      imageUrl: "https://example.com/images/wireless-mouse.jpg"
+                      stock: 25
+                      categoryId: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+                  meta:
+                    page: 1
+                    limit: 20
+                    total: 1
+      "400":
+        description: Parameter query tidak valid.
+        content:
+          application/json:
+            schema:
+             $ref: ../main.yaml#/components/schemas/ErrorResponse
+      "500":
+        description: Kesalahan server internal.
+        content:
+          application/json:
+            schema:
+              $ref: ../main.yaml#/components/schemas/ErrorResponse
+
+/products/{productId}:
+  get:
+    security: []
+    tags:
+      - Products
+    summary: Detail produk
+    description: Mengembalikan satu produk berdasarkan ID uniknya.
+    operationId: getProductById
+    parameters:
+      - name: productId
+        in: path
+        required: true
+        description: ID produk (primary key).
+        schema:
+          type: string
+          minLength: 1
+          example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+    responses:
+      "200":
+        description: Produk ditemukan.
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - data
+              properties:
+                data:
+                  $ref: ../schemas/Product.yaml#/Product
+            examples:
+              default:
+                summary: Contoh respons
+                value:
+                  data:
+                    id: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                    name: "Wireless Mouse"
+                    description: "Mouse wireless ergonomic dengan koneksi 2.4GHz."
+                    price: 149999
+                    imageUrl: "https://example.com/images/wireless-mouse.jpg"
+                    stock: 25
+                    categoryId: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+      "400":
+        description: ID produk tidak valid.
+        content:
+          application/json:
+            schema:
+              $ref: ../main.yaml#/components/schemas/ErrorResponse
+      "404":
+        description: Produk tidak ditemukan.
+        content:
+          application/json:
+            schema:
+             $ref: ../main.yaml#/components/schemas/ErrorResponse
+      "500":
+        description: Kesalahan server internal.
+        content:
+          application/json:
+            schema:
+              $ref: ../main.yaml#/components/schemas/ErrorResponse
