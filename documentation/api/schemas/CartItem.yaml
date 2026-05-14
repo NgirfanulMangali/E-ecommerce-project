@@ -1,0 +1,22 @@
+CartItem:
+  type: object
+  additionalProperties: false
+  description: Satu baris item di keranjang (relasi cart ke produk).
+  required:
+    - id
+    - productId
+    - quantity
+  properties:
+    id:
+      type: string
+      description: Primary key item keranjang.
+      example: "cit_01J1A2B3C4D5E6F7G8H9I0JKL"
+    productId:
+      type: string
+      description: ID produk.
+      example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+    quantity:
+      type: integer
+      description: Jumlah unit produk.
+      minimum: 1
+      example: 2

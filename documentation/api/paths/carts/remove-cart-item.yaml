@@ -1,0 +1,86 @@
+delete:
+  tags:
+    - Carts
+  summary: Hapus item dari keranjang
+  description: Menghapus satu item dari keranjang user berdasarkan `cartItemId`.
+  operationId: removeCartItem
+
+  parameters:
+    - name: cartItemId
+      in: path
+      required: true
+      description: ID item keranjang yang ingin dihapus.
+      schema:
+        type: string
+        example: "cartItem_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+  responses:
+    "200":
+      description: Item berhasil dihapus dari keranjang.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+            properties:
+              message:
+                type: string
+                example: "Item berhasil dihapus dari keranjang."
+          examples:
+            default:
+              summary: Item terhapus
+              value:
+                message: "Item berhasil dihapus dari keranjang."
+
+    "400":
+      description: Request tidak valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            validationError:
+              summary: Parameter path tidak valid
+              value:
+                message: "cartItemId tidak valid"
+                code: "VALIDATION_ERROR"
+
+    "401":
+      description: User belum login atau token tidak valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Token tidak ada atau tidak valid
+              value:
+                message: "Autentikasi diperlukan. Silakan login terlebih dahulu"
+                code: "UNAUTHORIZED"
+
+    "404":
+      description: Item tidak ditemukan di keranjang.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            cartItemNotFound:
+              summary: Item tidak ada di keranjang user
+              value:
+                message: "Item keranjang tidak ditemukan atau bukan milik Anda"
+                code: "CART_ITEM_NOT_FOUND"
+
+    "500":
+      description: Kesalahan server internal.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            internalError:
+              summary: Kesalahan server internal
+              value:
+                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                code: "INTERNAL_SERVER_ERROR"

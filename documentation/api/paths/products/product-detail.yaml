@@ -1,0 +1,76 @@
+get:
+  security: []
+  tags:
+    - Products
+  summary: Detail produk
+  description: Mengembalikan satu produk berdasarkan ID uniknya.
+  operationId: getProductById
+  parameters:
+    - name: productId
+      in: path
+      required: true
+      description: ID produk (primary key).
+      schema:
+        type: string
+        minLength: 1
+        example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+  responses:
+    "200":
+      description: Produk ditemukan.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - data
+            properties:
+              data:
+                $ref: ../../schemas/Product.yaml#/Product
+          examples:
+            default:
+              summary: Contoh respons
+              value:
+                data:
+                  id: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                  name: "Wireless Mouse"
+                  description: "Mouse wireless ergonomic dengan koneksi 2.4GHz."
+                  price: 149999
+                  imageUrl: "https://example.com/images/wireless-mouse.jpg"
+                  stock: 25
+                  categoryId: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+    "400":
+      description: ID produk tidak valid.
+      content:
+        application/json:
+          schema:
+            $ref: ../../main.yaml#/components/schemas/ErrorResponse
+          examples:
+            validationError:
+              summary: Parameter path tidak valid
+              value:
+                message: "productId tidak valid"
+                code: "VALIDATION_ERROR"
+    "404":
+      description: Produk tidak ditemukan.
+      content:
+        application/json:
+          schema:
+           $ref: ../../main.yaml#/components/schemas/ErrorResponse
+          examples:
+            productNotFound:
+              summary: Produk tidak ditemukan
+              value:
+                message: "Produk tidak ditemukan"
+                code: "PRODUCT_NOT_FOUND"
+    "500":
+      description: Kesalahan server internal.
+      content:
+        application/json:
+          schema:
+            $ref: ../../main.yaml#/components/schemas/ErrorResponse
+          examples:
+            internalError:
+              summary: Kesalahan server internal
+              value:
+                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                code: "INTERNAL_SERVER_ERROR"

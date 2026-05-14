@@ -15,7 +15,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: ../schemas/User.yaml#/UserCreateRequest
+          $ref: '#components/schemas/UserCreateRequest'
         examples:
           default:
             value:
@@ -39,35 +39,43 @@ post:
                 type: string
                 example: Registrasi berhasil
               data:
-                type: object
-                additionalProperties: false
-                properties:
-                  user:
-                    $ref: ../schemas/User.yaml#/User
-                  token:
-                    type: string
-                    description: JWT (opsional jika auto-login)
-                  expiresIn:
-                    type: integer
-                    description: Masa berlaku token dalam detik
+                $ref: '#components/schemas/AuthSuccessData'
 
     "400":
       description: Validation error
       content:
         application/json:
           schema:
-            $ref: ../main.yaml#/components/schemas/ErrorResponse
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            validationError:
+              summary: Validasi body gagal
+              value:
+                message: "Format email tidak valid"
+                code: "VALIDATION_ERROR"
 
     "409":
       description: Email sudah terdaftar
       content:
         application/json:
           schema:
-            $ref: ../main.yaml#/components/schemas/ErrorResponse
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            emailAlreadyRegistered:
+              summary: Email sudah digunakan
+              value:
+                message: "Email sudah terdaftar. gunakan email lain atau login"
+                code: "EMAIL_ALREADY_EXISTS"
 
     "500":
       description: Server error
       content:
         application/json:
           schema:
-            $ref: ../main.yaml#/components/schemas/ErrorResponse
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            internalError:
+              summary: Kesalahan server internal
+              value:
+                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                code: "INTERNAL_SERVER_ERROR"

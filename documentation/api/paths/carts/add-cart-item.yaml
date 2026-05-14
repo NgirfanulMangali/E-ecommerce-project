@@ -1,0 +1,85 @@
+post:
+  tags:
+    - Carts
+
+  summary: Tambah produk ke keranjang
+
+  description: >
+    Menambahkan produk ke keranjang user yang sedang login.
+    Jika produk sudah ada di keranjang, kuantitas akan ditambahkan.
+
+  operationId: addCartItem
+
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: false
+
+          required:
+            - productId
+            - quantity
+
+          properties:
+            productId:
+              type: string
+              minLength: 1
+              example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+            quantity:
+              type: integer
+              minimum: 1
+              example: 1
+
+  responses:
+    "201":
+      description: Item berhasil ditambahkan ke keranjang.
+
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: false
+
+            required:
+              - message
+              - data
+
+            properties:
+              message:
+                type: string
+                example: "Item ditambahkan ke keranjang."
+
+              data:
+                $ref: ../../schemas/CartItem.yaml#/CartItem
+
+    "401":
+      description: User belum login.
+
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Token tidak ada atau tidak valid
+              value:
+                message: "Autentikasi diperlukan. Silakan login terlebih dahulu"
+                code: "UNAUTHORIZED"
+
+    "500":
+      description: Kesalahan server internal.
+
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            internalError:
+              summary: Kesalahan server internal
+              value:
+                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                code: "INTERNAL_SERVER_ERROR"

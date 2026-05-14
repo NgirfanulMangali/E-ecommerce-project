@@ -1,0 +1,54 @@
+get:
+  tags:
+    - Carts
+  summary: Lihat keranjang aktif user
+  description: Mengembalikan isi keranjang aktif milik user yang sedang login.
+  operationId: getMyCart
+  
+  responses:
+    "200":
+      description: Keranjang berhasil diambil.
+      content:
+        application/json:
+          schema:
+            $ref: ../../schemas/Cart.yaml#/Cart
+          examples:
+            success:
+              summary: Keranjang berhasil diambil
+              value:
+                id: "crt_01J1A2B3C4D5E6F7G8H9I0JKL"
+                userId: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+                items:
+                  - id: "cit_01AAA"
+                    productId: "prd_01ABC"
+                    quantity: 2
+                  - id: "cit_01BBB"
+                    productId: "prd_01XYZ"
+                    quantity: 1
+                totalPrice: 299998
+
+    "401":
+      description: User belum login.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Token tidak ada atau tidak valid
+              value:
+                message: "Autentikasi diperlukan. Silakan login terlebih dahulu"
+                code: "UNAUTHORIZED"
+
+    "500":
+      description: Kesalahan server internal.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            internalError:
+              summary: Kesalahan server internal
+              value:
+                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                code: "INTERNAL_SERVER_ERROR"

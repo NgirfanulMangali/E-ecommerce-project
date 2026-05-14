@@ -20,26 +20,32 @@ security:
   - bearerAuth: []
 
 paths:
+
   /auth/login:
-    $ref: ./auth/login.yaml
+    $ref: ./paths/auth/login.yaml
 
   /auth/register:
-    $ref: ./auth/register.yaml
+    $ref: ./paths/auth/register.yaml
 
   /products:
-    $ref: ./paths/products.yaml
+    $ref: ./paths/products/list-products.yaml
 
   /products/{productId}:
-    $ref: ./paths/products.yaml
+    $ref: ./paths/products/product-detail.yaml
 
   /carts/me:
-    $ref: ./paths/carts.yaml
+    $ref: ./paths/carts/get-cart.yaml
 
   /carts/me/items:
-    $ref: ./paths/carts.yaml
+    $ref: ./paths/carts/add-cart-item.yaml
 
   /carts/me/items/{cartItemId}:
-    $ref: ./paths/carts.yaml
+    $ref: ./paths/carts/update-cart-item.yaml
+
+  carts/remove-cart-item.yaml:
+    $ref: ./paths/carts/remove-cart-item.yaml
+
+
 
 components:
   securitySchemes:
@@ -50,35 +56,30 @@ components:
       description: "Token JWT (Authorization: Bearer <token>)"
 
   schemas:
+
     User:
-      $ref: ./schemas/User.yaml
+      $ref: ./schemas/User.yaml#/User
 
     UserCreateRequest:
-      $ref: ./schemas/User.yaml
+      $ref: ./schemas/User.yaml#/UserCreateRequest
 
     Product:
-      $ref: ./schemas/Product.yaml
+      $ref: ./schemas/Product.yaml#/Product
+
+    LoginResponse:
+      $ref: ./schemas/Auth.yaml#/LoginResponse
+
+
+    AuthSuccessData:
+      $ref: ./schemas/Auth.yaml#/AuthSuccessData
+
+    LoginRequest:
+      $ref: ./schemas/Auth.yaml#/LoginRequest
+
+    AuthTokenPair:
+      $ref: ./schemas/Auth.yaml#/AuthTokenPair
+  
+    ErrorResponse:
+      $ref: ./schemas/ErrorResponse.yaml#/ErrorResponse
 
     
-    ErrorResponse:
-      type: object
-      additionalProperties: false
-      required:
-        - message
-        - code
-      properties:
-        message:
-          type: string
-        code:
-          type: string
-
-    SuccessResponse:
-      type: object
-      additionalProperties: false
-      required:
-        - message
-      properties:
-        message:
-          type: string
-        data:
-          type: object

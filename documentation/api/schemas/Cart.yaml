@@ -1,0 +1,27 @@
+Cart:
+  type: object
+  additionalProperties: false
+  description: Keranjang belanja milik user.
+  required:
+    - id
+    - userId
+    - items
+    - totalPrice
+  properties:
+    id:
+      type: string
+      example: "crt_01J1A2B3C4D5E6F7G8H9I0JKL"
+
+    userId:
+      type: string
+      example: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+
+    items:
+      type: array
+      items:
+        $ref: ./CartItem.yaml#/CartItem
+
+    totalPrice:
+      type: integer
+      minimum: 0
+      example: 299998

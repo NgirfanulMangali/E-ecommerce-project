@@ -1,0 +1,121 @@
+patch:
+  tags:
+    - Carts
+  summary: Ubah jumlah item di keranjang
+  description: |
+    Mengubah kuantitas item tertentu yang sudah ada di keranjang user.
+    Jika quantity = 0, item akan dihapus dari keranjang.
+  operationId: updateCartItemQuantity
+
+  parameters:
+    - name: cartItemId
+      in: path
+      required: true
+      description: ID item keranjang.
+      schema:
+        type: string
+        example: "cartItem_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+  requestBody:
+    required: true
+    content:
+      application/json:
+        schema:
+          type: object
+          additionalProperties: false
+          required:
+            - quantity
+          properties:
+            quantity:
+              type: integer
+              minimum: 0
+              description: |
+                Jumlah produk dalam keranjang.
+                Gunakan 0 untuk menghapus item dari keranjang.
+              example: 3
+
+  responses:
+    "200":
+      description: Item keranjang berhasil diperbarui.
+      content:
+        application/json:
+          schema:
+            type: object
+            required:
+              - message
+              - data
+            properties:
+              message:
+                type: string
+                example: "Item keranjang berhasil diperbarui."
+              data:
+                $ref: ../../schemas/Cart.yaml#/Cart
+          examples:
+            success:
+              summary: Quantity item berhasil diperbarui
+              value:
+                message: "Item keranjang berhasil diperbarui."
+                data:
+                  id: "crt_01J1A2B3C4D5E6F7G8H9I0JKL"
+                  userId: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+                  items:
+                    - id: "cit_01AAA"
+                      productId: "prd_01ABC"
+                      quantity: 3
+                    - id: "cit_01BBB"
+                      productId: "prd_01XYZ"
+                      quantity: 1
+                  totalPrice: 449997
+
+    "400":
+      description: Request tidak valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            validationError:
+              summary: Body atau parameter tidak valid
+              value:
+                message: "quantity harus berupa bilangan bulat tidak negatif"
+                code: "VALIDATION_ERROR"
+
+    "401":
+      description: User belum login atau token tidak valid.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              summary: Token tidak ada atau tidak valid
+              value:
+                message: "Autentikasi diperlukan. Silakan login terlebih dahulu"
+                code: "UNAUTHORIZED"
+
+    "404":
+      description: Item keranjang tidak ditemukan.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            cartItemNotFound:
+              summary: Item tidak ada di keranjang user
+              value:
+                message: "Item keranjang tidak ditemukan atau bukan milik Anda"
+                code: "CART_ITEM_NOT_FOUND"
+
+    "500":
+      description: Kesalahan server internal.
+      content:
+        application/json:
+          schema:
+            $ref: '#components/schemas/ErrorResponse'
+          examples:
+            internalError:
+              summary: Kesalahan server internal
+              value:
+                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                code: "INTERNAL_SERVER_ERROR"
+
