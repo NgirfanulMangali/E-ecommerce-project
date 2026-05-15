@@ -16,23 +16,12 @@ post:
     content:
       application/json:
         schema:
-          type: object
-          additionalProperties: false
-
-          required:
-            - productId
-            - quantity
-
-          properties:
-            productId:
-              type: string
-              minLength: 1
-              example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
-
-            quantity:
-              type: integer
-              minimum: 1
-              example: 1
+          $ref:  '#/components/schemas/CartItemCreateRequest'                    
+        examples:
+        default:
+          value:
+            productId: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+            quantity: 2
 
   responses:
     "201":
@@ -54,7 +43,20 @@ post:
                 example: "Item ditambahkan ke keranjang."
 
               data:
-                $ref: ../../schemas/CartItem.yaml#/CartItem
+                $ref: '#/components/schemas/CartItem'
+
+          examples:
+          success:
+            summary: Contoh item berhasil ditambahkan
+            value:
+              message: "Item ditambahkan ke keranjang."
+              data:
+                id: "cit_01J1A2B3C4D5E6F7G8H9I0JKL"
+                productId: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+                quantity: 2
+
+              
+            
 
     "401":
       description: User belum login.
@@ -62,7 +64,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             unauthorized:
               summary: Token tidak ada atau tidak valid
@@ -76,7 +78,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             internalError:
               summary: Kesalahan server internal

@@ -15,7 +15,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '#components/schemas/UserCreateRequest'
+          $ref: '#/components/schemas/UserCreateRequest'
         examples:
           default:
             value:
@@ -39,14 +39,14 @@ post:
                 type: string
                 example: Registrasi berhasil
               data:
-                $ref: '#components/schemas/AuthSuccessData'
+                $ref: '#/components/schemas/AuthSuccessData'
 
     "400":
       description: Validation error
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             validationError:
               summary: Validasi body gagal
@@ -59,7 +59,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             emailAlreadyRegistered:
               summary: Email sudah digunakan
@@ -72,7 +72,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             internalError:
               summary: Kesalahan server internal

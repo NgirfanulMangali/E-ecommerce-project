@@ -6,7 +6,7 @@ User:
     - id
     - email
     - name
-    - createdAt
+
   properties:
     id:
       type: string
@@ -21,11 +21,7 @@ User:
       type: string
       description: Nama user.
       example: "Zoro Tokyo"
-    createdAt:
-      type: string
-      format: date-time
-      description: Waktu pembuatan user.
-      example: "2026-05-12T09:21:00.000Z"
+  
 
 UserCreateRequest:
   type: object

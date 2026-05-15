@@ -21,6 +21,9 @@ security:
 
 paths:
 
+  /auth/me:
+    $ref: ./paths/auth/me.yaml
+
   /auth/login:
     $ref: ./paths/auth/login.yaml
 
@@ -42,8 +45,7 @@ paths:
   /carts/me/items/{cartItemId}:
     $ref: ./paths/carts/update-cart-item.yaml
 
-  carts/remove-cart-item.yaml:
-    $ref: ./paths/carts/remove-cart-item.yaml
+
 
 
 
@@ -75,11 +77,17 @@ components:
 
     LoginRequest:
       $ref: ./schemas/Auth.yaml#/LoginRequest
-
-    AuthTokenPair:
-      $ref: ./schemas/Auth.yaml#/AuthTokenPair
   
     ErrorResponse:
       $ref: ./schemas/ErrorResponse.yaml#/ErrorResponse
+
+    CartItem:
+      $ref: ./schemas/CartItem.yaml#/CartItem
+
+    CartItemCreateRequest:
+      $ref: ./schemas/CartItem.yaml#/CartItemCreateRequest
+
+    Cart: 
+      $ref: ./schemas/Cart.yaml#/Cart
 
     

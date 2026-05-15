@@ -20,3 +20,20 @@ CartItem:
       description: Jumlah unit produk.
       minimum: 1
       example: 2
+
+CartItemCreateRequest:
+  type: object
+  additionalProperties: false
+  required:
+    - productId
+    - quantity
+
+  properties:
+    productId:
+      type: string
+      example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
+
+    quantity:
+      type: integer
+      minimum: 1
+      example: 2

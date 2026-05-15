@@ -66,20 +66,4 @@ AuthSuccessData:
       example: 3600
 
       
-AuthTokenPair:
-  type: object
-  additionalProperties: false
-  description: Pasangan token JWT dan masa berlaku (tanpa data user).
-  required:
-    - token
-    - expiresIn
-  properties:
-    token:
-      type: string
-      description: JWT Bearer.
-      example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
-    expiresIn:
-      type: integer
-      description: Masa berlaku token dalam detik.
-      minimum: 1
-      example: 3600
+      

@@ -11,7 +11,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../schemas/Cart.yaml#/Cart
+            $ref: '#/components/schemas/Cart'
           examples:
             success:
               summary: Keranjang berhasil diambil
@@ -32,7 +32,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             unauthorized:
               summary: Token tidak ada atau tidak valid
@@ -45,7 +45,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             internalError:
               summary: Kesalahan server internal

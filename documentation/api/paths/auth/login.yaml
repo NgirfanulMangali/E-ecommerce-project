@@ -13,7 +13,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '#components/schemas/LoginRequest'
+          $ref: '#/components/schemas/LoginRequest'
 
   responses:
     "200":
@@ -21,7 +21,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/LoginResponse'
+            $ref: '#/components/schemas/LoginResponse'
 
           examples:
           success:
@@ -35,7 +35,7 @@ post:
                   id: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
                   email: "user@example.com"
                   name: "Zoro Tokyo"
-                  
+
 
                 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 
@@ -46,7 +46,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             invalidCredentials:
               summary: Login gagal
@@ -59,7 +59,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             validationError:
               summary: Validasi gagal
@@ -72,7 +72,7 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#components/schemas/ErrorResponse'
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             serverError:
               summary: Error server

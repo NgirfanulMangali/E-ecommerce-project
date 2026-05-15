@@ -25,7 +25,7 @@ get:
               - data
             properties:
               data:
-                $ref: ../../schemas/Product.yaml#/Product
+                $ref: '#/components/schemas/Product'
           examples:
             default:
               summary: Contoh respons
@@ -43,7 +43,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../main.yaml#/components/schemas/ErrorResponse
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             validationError:
               summary: Parameter path tidak valid
@@ -55,7 +55,7 @@ get:
       content:
         application/json:
           schema:
-           $ref: ../../main.yaml#/components/schemas/ErrorResponse
+           $ref: '#/components/schemas/ErrorResponse'
           examples:
             productNotFound:
               summary: Produk tidak ditemukan
@@ -67,7 +67,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: ../../main.yaml#/components/schemas/ErrorResponse
+            $ref: '#/components/schemas/ErrorResponse'
           examples:
             internalError:
               summary: Kesalahan server internal

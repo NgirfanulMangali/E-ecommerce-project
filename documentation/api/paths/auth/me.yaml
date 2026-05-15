@@ -1,0 +1,41 @@
+get:
+  tags:
+    - Auth
+  summary: Profil user saat ini
+  description: Mengambil data user yang sedang login berdasarkan token JWT.
+  operationId: getMe
+
+  responses:
+    "200":
+      description: Profil user berhasil diambil.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+
+          examples:
+            default:
+              value:
+                data:
+                  id: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+                  name: "Zoro Tokyo"
+                  email: "zoro@example.com"
+
+    "401":
+      description: User belum login.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+          examples:
+            unauthorized:
+              value:
+                message: "Autentikasi diperlukan. Silakan login terlebih dahulu."
+                code: "UNAUTHORIZED"
+
+    "500":
+      description: Kesalahan server internal.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
