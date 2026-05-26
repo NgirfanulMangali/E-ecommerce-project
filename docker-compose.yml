@@ -22,6 +22,9 @@ services:
       - ./server:/app
       - /app/node_modules
 
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/ecommerce
+
     depends_on:
       - postgres
 

@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
-import { PrismaClient } from "@prisma/client";
-
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 export const register = async (
  req: Request,
@@ -53,7 +50,7 @@ export const register = async (
 
       return res.status(500)
       .json({
-         message:"Server error"
+         message:"Terjadi kesalahan pada server. Silakan coba lagi nanti"
       });
 
    }

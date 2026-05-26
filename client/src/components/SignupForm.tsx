@@ -22,9 +22,33 @@ type Props = {
       });
     }
   
-    function handleSubmit(e: React.FormEvent) {
+    async function handleSubmit(e: React.FormEvent) {
       e.preventDefault();
-      console.log(formData);
+
+      try {
+        const response = await fetch("http://localhost:5000/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        });
+    
+        const data = await response.json();
+    
+        console.log(data);
+    
+        if (response.ok) {
+          alert("Register berhasil!");
+          setShowForm(false); // tutup form setelah sukses
+        } else {
+          alert(data.message || "Register gagal");
+        }
+    
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Terjadi kesalahan pada server. Silakan coba lagi nanti");
+      }
     }
   
     return (
