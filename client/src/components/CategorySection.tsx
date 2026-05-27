@@ -4,10 +4,10 @@ import partyBanner from "../assets/resources/banner of party.png";
 import gymBanner from "../assets/resources/banner of gym.png";
 
 const categories = [
-  { id: 1, image: casualBanner },
-  { id: 2, image: formalBanner },
-  { id: 3, image: partyBanner },
-  { id: 4, image: gymBanner },
+  { id: 1, image: casualBanner, name: "Casual" },
+  { id: 2, image: formalBanner, name: "Formal" },
+  { id: 3, image: partyBanner, name: "Party" },
+  { id: 4, image: gymBanner, name: "Gym" },
 ];
 
 function CategorySection() {
@@ -27,7 +27,7 @@ function CategorySection() {
 
               <img
                 src={category.image}
-                alt={category}
+                alt={category.name}
                 className="absolute inset-0 h-full w-full object-cover"
               />
             </article>
