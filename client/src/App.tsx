@@ -5,6 +5,7 @@ import NewArrivals from "./components/ NewArrivals";
 import TopSelling from "./components/TopSelling";
 import Testimonials from "./components/Testimonials";
 import CategorySection from "./components/CategorySection";
+import Footer from "./components/Footer";
 import SignupModal from "./components/SignupModal";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <TopSelling />
       <CategorySection />
       <Testimonials />
+      <Footer />
 
       <SignupModal
         showForm={showForm}
