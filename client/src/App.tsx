@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import NewArrivals from "./components/ NewArrivals";
 import SignupModal from "./components/SignupModal";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
     <div>
       <Header setShowForm={setShowForm} />
       <Hero />
+      <NewArrivals />
 
       <SignupModal
         showForm={showForm}
