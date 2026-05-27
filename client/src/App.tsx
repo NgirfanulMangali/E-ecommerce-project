@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Header from "./components/Header";
+import Hero from "./components/Hero";
 import SignupModal from "./components/SignupModal";
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
   return (
     <div>
       <Header setShowForm={setShowForm} />
+      <Hero />
 
       <SignupModal
         showForm={showForm}

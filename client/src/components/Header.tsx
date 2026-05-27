@@ -26,8 +26,8 @@ function Header({ setShowForm }: Props) {
 
       <header className="flex justify-around mt-5">
         <section className="flex">
-          <img src={hamburgerIcon} alt="menu" className="mr-3 ml-4" />
-          <img src={shopCo} alt="logo" />
+          <img src={hamburgerIcon} alt="menu" className="mr-3" />
+          <img src={shopCo} alt="logo" className="mr-15" />
         </section>
 
         <section className="flex">
