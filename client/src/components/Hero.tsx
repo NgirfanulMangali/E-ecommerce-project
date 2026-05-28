@@ -6,15 +6,14 @@ import zara from "../assets/resources/zara.svg";
 import gucci from "../assets/resources/gucci.svg";
 import prada from "../assets/resources/prada.svg";
 import calvinKlein from "../assets/resources/calvin klein.svg";
+import findClothes from "../assets/resources/FIND CLOTHES THAT MATCHES YOUR STYLE.png";
 
 function Hero() {
   return (
     <section className="mt-6">
       <div className="max-w-[1240px] mx-auto">
         <div className="bg-[#F2F0F1] px-4 pt-9 sm:px-8 sm:pt-12">
-          <h1 className="font-satoshi font-bold text-[35px] leading-[33px] tracking-[-0.02em] text-black max-w-[300px] sm:text-[52px] sm:leading-[50px] sm:max-w-[540px]">
-            FIND CLOTHES THAT MATCHES YOUR STYLE
-          </h1>
+          <img src={findClothes} alt="Find clothes that matches your style" className="h-[93px] w-[315px]" />
 
           <p className="font-satoshi text-[14px] leading-[20px] text-black/60 mt-5 max-w-[350px] sm:text-[16px] sm:leading-[24px] sm:max-w-[560px]">
             Browse through our diverse range of meticulously crafted garments,
@@ -78,14 +77,14 @@ function Hero() {
 
       <div className="bg-black py-5 px-5 sm:px-8">
         <div className="max-w-[1240px] mx-auto grid grid-cols-3 sm:flex sm:flex-wrap sm:items-center sm:justify-between gap-y-4">
-          <img src={versace} alt="Versace" className="h-[16px] w-auto" />
-          <img src={zara} alt="Zara" className="h-[16px] w-auto justify-self-center" />
-          <img src={gucci} alt="Gucci" className="h-[16px] w-auto justify-self-end" />
-          <img src={prada} alt="Prada" className="h-[16px] w-auto col-span-1" />
+          <img src={versace} alt="Versace" className="h-[23px] w-[116px]" />
+          <img src={zara} alt="Zara" className="h-[26px] w-[63px] justify-self-center" />
+          <img src={gucci} alt="Gucci" className="h-[25px] w-[109px] justify-self-end" />
+          <img src={prada} alt="Prada" className="h-[21px] w-[127px] col-span-1" />
           <img
             src={calvinKlein}
             alt="Calvin Klein"
-            className="h-[16px] w-auto col-span-2 justify-self-center sm:justify-self-auto"
+            className="h-[21px] w-[134px] col-span-2 justify-self-center sm:justify-self-auto"
           />
         </div>
       </div>
