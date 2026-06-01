@@ -7,9 +7,11 @@ import Testimonials from "./components/Testimonials";
 import CategorySection from "./components/CategorySection";
 import Footer from "./components/Footer";
 import SignupModal from "./components/SignupModal";
+import LoginModal from "./components/LoginModal";
 
 function App() {
   const [showForm, setShowForm] = useState(false);
+  const [showLoginForm, setShowLoginForm] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -17,9 +19,14 @@ function App() {
     password: "",
   });
 
+  const [loginFormData, setLoginFormData] = useState({
+    email: "",
+    password: "",
+  });
+
   return (
     <div>
-      <Header setShowForm={setShowForm} />
+      <Header setShowForm={setShowForm} setShowLoginForm={setShowLoginForm} />
       <Hero />
       <NewArrivals />
       <TopSelling />
@@ -32,6 +39,13 @@ function App() {
         setShowForm={setShowForm}
         formData={formData}
         setFormData={setFormData}
+      />
+
+      <LoginModal
+        showLoginForm={showLoginForm}
+        setShowLoginForm={setShowLoginForm}
+        loginFormData={loginFormData}
+        setLoginFormData={setLoginFormData}
       />
     </div>
   );

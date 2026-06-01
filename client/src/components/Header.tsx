@@ -6,9 +6,10 @@ import login from "../assets/resources/login.png";
 
 type Props = {
   setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
+  setShowLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Header({ setShowForm }: Props) {
+function Header({ setShowForm, setShowLoginForm }: Props) {
   return (
     <>
       <section className="h-[34px] bg-black flex items-center justify-center">
@@ -33,7 +34,9 @@ function Header({ setShowForm }: Props) {
         <section className="flex">
           <img src={searchIcon} alt="search" className="mr-3" />
           <img src={cart} alt="cart" className="mr-3" />
-          <img src={login} alt="login" />
+          <button onClick={() => setShowLoginForm(true)}>
+            <img src={login} alt="login" />
+          </button>
         </section>
       </header>
     </>
