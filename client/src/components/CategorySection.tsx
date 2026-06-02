@@ -13,7 +13,7 @@ const categories = [
 function CategorySection() {
   return (
     <section className="px-4 pb-10 bg-white">
-      <div className="max-w-[1240px] mx-auto rounded-[22px] bg-[#F0F0F0] p-5 sm:p-8">
+      <div className="max-w-310 mx-auto rounded-[22px] bg-[#F0F0F0] p-5 sm:p-8">
         <h2 className="text-center font-satoshi font-bold text-[32px] leading-[32px] tracking-[-0.02em]">
           BROWSE BY DRESS STYLE
         </h2>
@@ -22,7 +22,7 @@ function CategorySection() {
           {categories.map((category) => (
             <article
               key={category.id}
-              className="relative h-[190px] rounded-[20px] bg-white overflow-hidden"
+              className="relative h-47.5 rounded-[20px] bg-white overflow-hidden"
             >
 
               <img

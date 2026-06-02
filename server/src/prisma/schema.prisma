@@ -9,6 +9,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
@@ -17,3 +18,18 @@ model User {
   email     String   @unique
   password  String
 }
+
+model Product {
+  id          String @id @default(cuid())
+  name        String
+  description String
+  price       Int
+  imageUrl    String
+  stock       Int
+
+  categoryId  String
+
+  isNewArrival Boolean @default(false)
+  isTopSelling Boolean @default(false)
+}
+

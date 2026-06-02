@@ -1,7 +1,5 @@
 import tshirt1 from "../assets/clothes product/formal/mens/trendyol-1120-5421125-6.webp";
-import shirt2 from "../assets/clothes product/party/mens/moc-4891-0451063-4.webp";
-import top3 from "../assets/clothes product/Gym/mens/under-armour-5012-7244953-2.webp";
-import top4 from "../assets/clothes product/formal/womens/platini-5279-4699025-1.webp";
+import shirt2 from "../assets/clothes product/party/mens/moc-4891-0451063-4.webp";import top3 from "../assets/clothes product/Gym/mens/under-armour-5012-7244953-2.webp";
 import smallStar from "../assets/resources/small star icon.svg";
 
 const products = [
@@ -23,24 +21,7 @@ const products = [
     rating: 4,
     image: shirt2,
   },
-  {
-    id: 3,
-    name: "Training Top",
-    price: 199000,
-    originalPrice: 209000,
-    discountPercent: 5,
-    rating: 4.5,
-    image: top3,
-  },
-  {
-    id: 4,
-    name: "Office Essentials",
-    price: 179000,
-    originalPrice: 189000,
-    discountPercent: 5,
-    rating: 4.8,
-    image: top4,
-  },
+
 ];
 
 const formatRupiah = (value: number) =>

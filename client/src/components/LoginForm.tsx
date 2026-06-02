@@ -54,7 +54,7 @@ function LoginForm({ formData, setFormData, setShowLoginForm }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white p-6 rounded-lg w-[300px]"
+      className="bg-white p-6 rounded-lg w-75"
     >
       <h2 className="text-xl font-bold mb-4">Login</h2>
 
