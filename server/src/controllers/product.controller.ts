@@ -1,19 +1,13 @@
-import { PrismaClient } from "@prisma/client";
 import { Request, Response } from "express";
-
-const prisma = new PrismaClient();
+import { prisma } from "../lib/prisma";
 
 export const getProducts = async (
   req: Request,
   res: Response
 ) => {
-  try {
-    const products = await prisma.product.findMany();
+  console.log("Controller masuk");
 
-    res.status(200).json(products);
-  } catch (error) {
-    res.status(500).json({
-      message: "Failed to get products",
-    });
-  }
+  res.json({
+    status: "ok",
+  });
 };
