@@ -2,24 +2,22 @@ import { prisma } from "./lib/prisma";
 const prismaClient = prisma as any;
 
 async function main() {
-  // Create a new user with a post
-  const user = await prismaClient.user.create({
-    data: {
-      name: "Alice",
+  
+  await prisma.post.deleteMany({
+  where: {
+    author: {
       email: "alice@prisma.io",
-      posts: {
-        create: {
-          title: "Hello World",
-          content: "This is my first post!",
-          published: true,
-        },
-      },
     },
-    include: {
-      posts: true,
+  },
+});
+
+  const deleteUser = await prismaClient.user.delete({
+    where: {
+      email: "alice@prisma.io",
+
     },
   });
-  console.log("Created user:", user);
+  console.log("Deleted user:", deleteUser);
 
   // Fetch all users with their posts
   const allUsers = await prismaClient.user.findMany({
