@@ -14,17 +14,52 @@ datasource db {
 }
 
 
-model User { 
-  id    Int     @id @default(autoincrement()) 
-  email String  @unique
-  name  String?
-  posts Post[]
-} 
-model Post { 
-  id        Int     @id @default(autoincrement()) 
-  title     String
-  content   String?
-  published Boolean @default(false) 
-  author    User    @relation(fields: [authorId], references: [id]) 
-  authorId  Int
-} 
+model Category {
+
+  id          String    @id @default(cuid())
+
+  name        String    @unique
+
+  createdAt   DateTime  @default(now())
+
+  updatedAt   DateTime  @updatedAt
+
+  products    Product[]
+
+
+
+  @@map("categories")
+
+}
+
+
+
+model Product {
+
+  id          String    @id @default(cuid())
+
+  name        String
+
+  description String
+
+  price       Decimal   
+
+  imageUrl    String
+
+  stock       Int
+
+  categoryId  String
+
+  createdAt   DateTime  @default(now())
+
+  updatedAt   DateTime  @updatedAt
+
+
+
+  category    Category  @relation(fields: [categoryId], references: [id])
+
+
+
+  @@map("products")
+
+}

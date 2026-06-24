@@ -10,6 +10,9 @@ Product:
     - imageUrl
     - stock
     - categoryId
+    - createdAt
+    - updatedAt
+
   properties:
     id:
       type: string
@@ -44,3 +47,13 @@ Product:
       type: string
       description: ID kategori produk (foreign key ke kategori).
       example: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
+    createdAt:
+      type: string
+      format: date-time
+      description: Tanggal dan waktu pembuatan produk.
+      example: "2024-06-01T12:00:00Z"
+    updatedAt:
+      type: string
+      format: date-time
+      description: Tanggal dan waktu pembaruan produk terakhir.
+      example: "2024-06-15T15:30:00Z"
