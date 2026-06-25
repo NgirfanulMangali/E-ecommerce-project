@@ -8,10 +8,10 @@ ErrorResponse:
   properties:
     message:
       type: string
-      description: Pesan error untuk client.
-      example: "Query parameter tidak valid."
+      description: Error message for the client.
+      example: "Query parameter is not valid."
 
     code:
       type: string
-      description: Kode error untuk penanganan programatik.
+      description: Error code for programmatic handling.
       example: "INVALID_REQUEST"

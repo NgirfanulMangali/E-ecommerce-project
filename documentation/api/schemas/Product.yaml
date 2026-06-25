@@ -20,40 +20,41 @@ Product:
       example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
     name:
       type: string
-      description: Nama produk.
+      description: product name.
       minLength: 1
       example: "Wireless Mouse"
     description:
       type: string
-      description: Deskripsi produk.
+      description: product description.
       minLength: 1
-      example: "Mouse wireless ergonomic dengan koneksi 2.4GHz."
+      example: "Mouse wireless ergonomic with 2.4GHz connectivity."
     price:
-      type: integer
-      description: Harga produk.
+      type: decimal
+      format: float
+      description: product price.
       minimum: 0
-      example: 149999
+      example: 8.4
     imageUrl:
       type: string
-      format: uri
-      description: URL gambar produk.
+      format: url
+      description: product image URL.
       example: "https://example.com/images/wireless-mouse.jpg"
     stock:
       type: integer
-      description: Jumlah stok produk.
+      description: amount of product in stock.
       minimum: 0
       example: 25
     categoryId:
       type: string
-      description: ID kategori produk (foreign key ke kategori).
+      description: product category ID (foreign key to category).
       example: "cat_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
     createdAt:
       type: string
       format: date-time
-      description: Tanggal dan waktu pembuatan produk.
+      description: date and time when the product was created.
       example: "2024-06-01T12:00:00Z"
     updatedAt:
       type: string
       format: date-time
-      description: Tanggal dan waktu pembaruan produk terakhir.
+      description: date and time when the product was last updated.
       example: "2024-06-15T15:30:00Z"

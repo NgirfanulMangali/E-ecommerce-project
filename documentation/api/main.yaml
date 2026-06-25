@@ -3,7 +3,7 @@ openapi: 3.0.3
 info:
   title: E-commerce API
   version: 1.0.0
-  description: Dokumentasi API untuk proyek E-commerce.
+  description: Documentation of API for the E-commerce project.
 
 servers:
   - url: http://localhost:5000
