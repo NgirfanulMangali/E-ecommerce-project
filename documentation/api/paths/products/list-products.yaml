@@ -83,7 +83,7 @@ get:
       content:
         application/json:
           schema:
-           $ref: '#/components/schemas/ErrorResponse'
+           $ref: '#/components/responses/ErrorResponse'
           examples:
             validationError:
               summary: Parameter query not valid
@@ -96,7 +96,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'       
+            $ref: '#/components/responses/ErrorResponse'       
           examples:
             internalError:
               summary: Internal server error
