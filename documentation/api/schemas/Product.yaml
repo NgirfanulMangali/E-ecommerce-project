@@ -20,13 +20,11 @@ Product:
       example: "prd_01J0Y6QW3R9F8T2U7V5X4Z1ABC"
     name:
       type: string
-      description: product name.
-      minLength: 1
+      description: product name
       example: "Wireless Mouse"
     description:
       type: string
-      description: product description.
-      minLength: 1
+      description: product description
       example: "Mouse wireless ergonomic with 2.4GHz connectivity."
     price:
       type: decimal

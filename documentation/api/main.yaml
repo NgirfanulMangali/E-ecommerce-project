@@ -10,11 +10,13 @@ servers:
 
 tags:
   - name: Products
-    description: Daftar dan detail produk untuk katalog toko.
+    description: List and detail of products, including filtering by categoryId.
   - name: Carts
     description: Operasi keranjang belanja untuk user yang login.
   - name: Auth
     description: Autentikasi (register, login) dan token JWT.
+  - name: Categories
+    description: product categories.
 
 security:
   - bearerAuth: []
@@ -71,6 +73,8 @@ components:
     LoginResponse:
       $ref: ./schemas/Auth.yaml#/LoginResponse
 
+    Category:
+      $ref: ./schemas/Category.yaml#/Category
 
     AuthSuccessData:
       $ref: ./schemas/Auth.yaml#/AuthSuccessData
@@ -86,8 +90,7 @@ components:
 
     Cart: 
       $ref: ./schemas/Cart.yaml#/Cart
-
-  responses:
+      
 
     ErrorResponse:
       $ref: ./schemas/ErrorResponse.yaml#/ErrorResponse

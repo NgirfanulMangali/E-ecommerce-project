@@ -1,0 +1,23 @@
+Category:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Unique identifier for the category.
+      name:
+        type: string
+        description: Name of the category.
+      description:
+        type: string
+        description: Description of the category.
+      created_at:
+        type: string
+        format: date-time
+        description: Timestamp when the category was created.
+      updated_at:
+        type: string
+        format: date-time
+        description: Timestamp when the category was last updated.
+    required:
+      - id
+      - name
