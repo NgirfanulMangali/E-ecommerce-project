@@ -33,6 +33,14 @@ model Category {
 }
 
 
+enum ProductType { 
+
+  NEW_ARRIVAL
+  TOP_SELLING
+
+}
+
+
 
 model Product {
 
@@ -47,6 +55,8 @@ model Product {
   imageUrl    String
 
   stock       Int
+
+  type        ProductType
 
   categoryId  String
 
