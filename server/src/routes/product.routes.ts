@@ -1,24 +1,9 @@
-import { Router } from "express";
-import { prisma } from "../lib/prisma";
+import { Router } from 'express';
+import { getProducts } from '../controllers/product.controller';
 
 const router = Router();
 
-router.get("/", async (req, res) => {
-  try {
-    console.log("Sebelum query");
-
-    const products = await prisma.product.findMany();
-
-    console.log("Setelah query");
-
-    res.json(products);
-  } catch (error) {
-    console.error(error);
-
-    res.status(500).json({
-      message: "Query failed",
-    });
-  }
-});
+router.get('/', getProducts);
 
 export default router;
+
