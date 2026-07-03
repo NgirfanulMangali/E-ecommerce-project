@@ -1,3 +1,6 @@
+export type ProductType = "NEW_ARRIVAL" | "TOP_SELLING";
+
+
 export interface Product {
   id: string;
   name: string;
@@ -5,7 +8,7 @@ export interface Product {
   price: number;
   imageUrl: string;
   stock: number;
+  type: ProductType;
   categoryId: string;
-  isNewArrival: boolean;
-  isTopSelling: boolean;
+  
 }

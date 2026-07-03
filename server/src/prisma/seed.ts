@@ -11,7 +11,7 @@ async function main() {
                 price: 60.00,
                 categoryId: "cmqyv8rcn00009tjyu04mwlp1",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/cotton-on-4495.webp",
+                imageUrl: "/images/topselling/cotton-on-4495.webp",
                 stock: 15
             },
             {
@@ -20,7 +20,7 @@ async function main() {
                 price: 45.99,
                 categoryId: "cmqyv8rcn00009tjyu04mwlp1",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/gap-6494.webp",
+                imageUrl: "/images/topselling/gap-6494.webp",
                 stock: 12
             },
             {
@@ -29,7 +29,7 @@ async function main() {
                 price: 45.99,
                 categoryId: "cmqyv8rcn00009tjyu04mwlp1",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/lacoste-6694.webp",
+                imageUrl: "/images/topselling/lacoste-6694.webp",
                 stock: 14
             },
              {
@@ -38,7 +38,7 @@ async function main() {
                 price: 80.00,
                 categoryId: "cmqyv8rco00019tjy2ak1gpu1",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/mango-man-7169.webp",
+                imageUrl: "/images/topselling/mango-man-7169.webp",
                 stock: 15
             },
             {
@@ -47,7 +47,7 @@ async function main() {
                 price: 55.99,
                 categoryId: "cmqyv8rco00019tjy2ak1gpu1",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/trendyshop-3975.webp",
+                imageUrl: "/images/topselling/trendyshop-3975.webp",
                 stock: 12
             },
             {
@@ -56,7 +56,7 @@ async function main() {
                 price: 85.99,
                 categoryId: "cmqyv8rco00019tjy2ak1gpu1",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/twenty-eight-shoes-7518.webp",
+                imageUrl: "/images/topselling/twenty-eight-shoes-7518.webp",
                 stock: 14
             },
             {
@@ -65,7 +65,7 @@ async function main() {
                 price: 70.00,
                 categoryId: "cmqyv8rco00029tjydu1sfi53",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/adidas-0898.webp",
+                imageUrl: "/images/topselling/adidas-0898.webp",
                 stock: 15
             },
             {
@@ -74,7 +74,7 @@ async function main() {
                 price: 65.99,
                 categoryId: "cmqyv8rco00029tjydu1sfi53",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/nike-9982.webp",
+                imageUrl: "/images/topselling/nike-9982.webp",
                 stock: 12
             },
             {
@@ -83,7 +83,7 @@ async function main() {
                 price: 25.99,
                 categoryId: "cmqyv8rco00029tjydu1sfi53",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/under-armour-0350.webp",
+                imageUrl: "/images/topselling/under-armour-0350.webp",
                 stock: 14
             },
              {
@@ -92,7 +92,7 @@ async function main() {
                 price: 90.00,
                 categoryId: "cmqyv8rco00039tjyjtvoia1g",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/avva-3846.webp",
+                imageUrl: "/images/topselling/avva-3846.webp",
                 stock: 15
             },
             {
@@ -101,7 +101,7 @@ async function main() {
                 price: 95.99,
                 categoryId: "cmqyv8rco00039tjyjtvoia1g",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/levi-s-2778.webp",
+                imageUrl: "/images/topselling/levi-s-2778.webp",
                 stock: 12
             },
             {
@@ -110,7 +110,7 @@ async function main() {
                 price: 96.99,
                 categoryId: "cmqyv8rco00039tjyjtvoia1g",
                 type: "TOP_SELLING",
-                imageUrl: "../../public/images/topselling/tommy-hilfiger-7934.webp",
+                imageUrl: "/images/topselling/tommy-hilfiger-7934.webp",
                 stock: 14
             }
         ]

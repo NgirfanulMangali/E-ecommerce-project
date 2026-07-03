@@ -1,14 +1,15 @@
-import type { Product } from "../types/product";
+import type { Product, ProductType } from "../types/product";
 
 type ProductCardProps = {
   product: Product;
+  type?: ProductType;
 };
 
-const formatRupiah = (value: number) =>
-  new Intl.NumberFormat("id-ID", {
+const formatUSD = (value: number) =>
+  new Intl.NumberFormat("en-US", {
     style: "currency",
-    currency: "IDR",
-    maximumFractionDigits: 0,
+    currency: "USD",
+    maximumFractionDigits: 2,
   }).format(value);
 
 function ProductCard({ product }: ProductCardProps) {
@@ -27,9 +28,10 @@ function ProductCard({ product }: ProductCardProps) {
       </h3>
 
       <p className="mt-1 font-satoshi font-bold text-[24px] leading-[30px]">
-        {formatRupiah(product.price)}
+        {formatUSD(product.price)}
       </p>
     </article>
+    
   );
 }
 
