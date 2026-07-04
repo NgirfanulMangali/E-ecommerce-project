@@ -1,52 +1,11 @@
-import { useState } from "react";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import NewArrivals from "./components/ NewArrivals";
-import TopSelling from "./components/TopSelling";
-import Testimonials from "./components/Testimonials";
-import CategorySection from "./components/CategorySection";
-import Footer from "./components/Footer";
-import SignupModal from "./components/SignupModal";
-import LoginModal from "./components/LoginModal";
+import Home from './pages/Home'
+
 
 function App() {
-  const [showForm, setShowForm] = useState(false);
-  const [showLoginForm, setShowLoginForm] = useState(false);
-
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: "",
-  });
-
-  const [loginFormData, setLoginFormData] = useState({
-    email: "",
-    password: "",
-  });
-
+ 
   return (
     <div>
-      <Header setShowForm={setShowForm} setShowLoginForm={setShowLoginForm} />
-      <Hero />
-      <NewArrivals />
-      <TopSelling />
-      <CategorySection />
-      <Testimonials />
-      <Footer />
-
-      <SignupModal
-        showForm={showForm}
-        setShowForm={setShowForm}
-        formData={formData}
-        setFormData={setFormData}
-      />
-
-      <LoginModal
-        showLoginForm={showLoginForm}
-        setShowLoginForm={setShowLoginForm}
-        loginFormData={loginFormData}
-        setLoginFormData={setLoginFormData}
-      />
+      <Home />
     </div>
   );
 }

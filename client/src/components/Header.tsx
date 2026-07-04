@@ -4,24 +4,13 @@ import searchIcon from "../assets/resources/searchIcon.svg";
 import cart from "../assets/resources/cart.svg";
 import login from "../assets/resources/login.png";
 
-type Props = {
-  setShowForm: React.Dispatch<React.SetStateAction<boolean>>;
-  setShowLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
-};
 
-function Header({ setShowForm, setShowLoginForm }: Props) {
+function Header() {
   return (
     <>
-      <section className="h-[34px] bg-black flex items-center justify-center">
-        <p className="text-white text-xs">
-          Sign up and get 20% off to your first order.
-
-          <button
-            onClick={() => setShowForm(true)}
-            className="underline ml-1"
-          >
-            Sign Up Now
-          </button>
+      <section className="h-8.5 bg-black flex items-center justify-center">
+        <p className="text-white text-xs flex items-center gap-3">
+          <span>Sign up and get 20% off to your first order. <span className="underline text-xs font-medium">Sign Up Now</span></span>
         </p>
       </section>
 
@@ -34,9 +23,9 @@ function Header({ setShowForm, setShowLoginForm }: Props) {
         <section className="flex">
           <img src={searchIcon} alt="search" className="mr-3" />
           <img src={cart} alt="cart" className="mr-3" />
-          <button onClick={() => setShowLoginForm(true)}>
-            <img src={login} alt="login" />
-          </button>
+          <img src={login} alt="login" className="mr-3" />
+         
+          
         </section>
       </header>
     </>
