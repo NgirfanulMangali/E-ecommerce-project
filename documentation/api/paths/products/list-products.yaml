@@ -45,10 +45,10 @@ get:
               data:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Product'
+                  $ref: ../../schemas/Product.yaml#/Product
               meta:
                 type: object
-                description: Metadata paginasi (opsional, if server implements).
+                description: Pagination metadata (optional, if server implements).
                 properties:
                   page:
                     type: integer
@@ -83,7 +83,7 @@ get:
       content:
         application/json:
           schema:
-           $ref: '#/components/schemas/ErrorResponse'
+           $ref: ../../schemas/ErrorResponse.yaml#/ErrorResponse
           examples:
             validationError:
               summary: Parameter query not valid
@@ -96,10 +96,10 @@ get:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'       
+                  $ref: ../../schemas/ErrorResponse.yaml#/ErrorResponse       
           examples:
             internalError:
               summary: Internal server error
               value:
-                message: "An internal server error occurred. Please try again later."
+                message: "An error occurred on the server. Please try again later"
                 code: "INTERNAL_SERVER_ERROR"
