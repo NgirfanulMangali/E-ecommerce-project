@@ -41,7 +41,7 @@ UserCreateRequest:
       type: string
       format: password
       description: Password plaintext from client (will be hashed on the server).
-      minLength: 8
+      minLength: 10
       example: "P@ssw0rd123"
     name:
       type: string

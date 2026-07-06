@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
-import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 import { prisma } from "../lib/prisma";
+import jwt from "jsonwebtoken";
+import bcrypt from "bcryptjs";
+
+import { registerUser, checkEmailExists } from "../services/auth.service";
 
 export const register = async (
  req: Request,
@@ -12,51 +14,63 @@ export const register = async (
 
    try{
 
-      const userExist=
-      await prisma.user.findUnique({
-         where:{
-             email
-         }
-      });
+      if (!name || !email || !password) {
+         return res.status(400).json({
+           message: "Name, email, and password are required",
+           code: "MISSING_FIELDS",
+         });
+       }
 
-      if(userExist){
 
-          return res.status(400)
-          .json({
-            message:"Email sudah dipakai"
-          });
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+         return res.status(400).json({
+           message: "Invalid email format",
+           code: "VALIDATION_ERROR",
+         });
+       }
+
+
+       if(password.length < 10){
+         return res.status(400).json({
+           message:"Password must be at least 8 characters long",
+           code:"PASSWORD_TOO_SHORT",
+         });
+       }
+
+       if(password.length > 20){
+         return res.status(400).json({
+           message:"Password must be less than 20 characters long",
+           code:"PASSWORD_TOO_LONG",
+         });
+       }  
+
+       const emailExists = await checkEmailExists(email);
+      if(emailExists){
+        return res.status(409).json({
+          message:"Email already registered. use a different email or login",
+          code:"EMAIL_ALREADY_EXISTS",
+        });
       }
 
-      const hashedPassword=
-      await bcrypt.hash(password,10);
+      const user= await registerUser(name,email,password);
 
-      const user=
-      await prisma.user.create({
+      const { password: _, ...safeUser } = user;
 
-          data:{
-              name,
-              email,
-              password:hashedPassword
-          }
-
+      return res.status(201).json({
+        message:"Registration successful",
+        data:safeUser,
       });
-
-      return res.status(201)
-      .json({
-        message:"Register berhasil",
-        data:user
-      });
-
    }catch(error){
-
-      return res.status(500)
-      .json({
-         message:"Terjadi kesalahan pada server. Silakan coba lagi nanti"
+      return res.status(500).json({
+        message:"An error occurred on the server. Please try again later",
+        code:"INTERNAL_SERVER_ERROR",
       });
-
     }
 
 }
+
+
 
 export const login = async (
  req: Request,

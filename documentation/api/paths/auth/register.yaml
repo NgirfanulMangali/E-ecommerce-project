@@ -47,7 +47,7 @@ post:
             validationError:
               summary: Validation error
               value:
-                message: "Format email tidak valid"
+                message: "Invalid email format"
                 code: "VALIDATION_ERROR"
 
     "409":

@@ -17,3 +17,4 @@ export async function getAllProducts() {
         imageUrl: toPublicImageUrl(product.imageUrl),
     }));
 }
+
