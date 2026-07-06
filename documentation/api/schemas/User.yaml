@@ -1,7 +1,7 @@
 User:
   type: object
   additionalProperties: false
-  description: User entity (tabel `users`).
+  description: User entity (`users` table).
   required:
     - id
     - email
@@ -10,23 +10,23 @@ User:
   properties:
     id:
       type: string
-      description: Primary key user.
+      description: Primary key of the user.
       example: "usr_01HZXQ2WQ0Y5J3C3G2Z8D7H9JK"
     email:
       type: string
       format: email
-      description: Email user (unik).
+      description: Email of the user (unique).
       example: "user@example.com"
     name:
       type: string
-      description: Nama user.
+      description: Name of the user.
       example: "Zoro Tokyo"
   
 
 UserCreateRequest:
   type: object
   additionalProperties: false
-  description: Payload untuk membuat user baru.
+  description: Payload for creating a new user.
   required:
     - email
     - password
@@ -35,16 +35,16 @@ UserCreateRequest:
     email:
       type: string
       format: email
-      description: Email user (unik).
+      description: Email of the user (unique).
       example: "user@example.com"
     password:
       type: string
       format: password
-      description: Password plaintext dari client (akan di-hash oleh server).
+      description: Password plaintext from client (will be hashed on the server).
       minLength: 8
       example: "P@ssw0rd123"
     name:
       type: string
-      description: Nama user.
+      description: Name of the user.
       minLength: 1
       example: "Zoro Tokyo"

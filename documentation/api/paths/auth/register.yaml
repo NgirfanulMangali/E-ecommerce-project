@@ -2,20 +2,16 @@ post:
   security: []
   tags:
     - Auth
-  summary: Registrasi user baru
-  description: |
-    Membuat akun baru dengan email, password, dan nama.
-    Email harus unik dan password akan di-hash di server.
-    Response dapat mengembalikan JWT jika auto-login diaktifkan.
-
-  operationId: register
-
+  summary: 
+    register a new user
+  description: register a new user with email, password, and name. email must be unique and password will be hashed on the server. response can return JWT if auto-login is enabled.
+  operationId: registerUser
   requestBody:
     required: true
     content:
       application/json:
         schema:
-          $ref: '#/components/schemas/UserCreateRequest'
+          $ref: ../../schemas/User.yaml#/UserCreateRequest
         examples:
           default:
             value:
@@ -25,7 +21,7 @@ post:
 
   responses:
     "201":
-      description: Registrasi berhasil
+      description: Registration successful
       content:
         application/json:
           schema:
@@ -37,34 +33,34 @@ post:
             properties:
               message:
                 type: string
-                example: Registrasi berhasil
+                example: Registration successful
               data:
-                $ref: '#/components/schemas/AuthSuccessData'
+                $ref: ../../schemas/Auth.yaml#/AuthSuccessData
 
     "400":
       description: Validation error
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: ../../schemas/ErrorResponse.yaml#/ErrorResponse
           examples:
             validationError:
-              summary: Validasi body gagal
+              summary: Validation error
               value:
                 message: "Format email tidak valid"
                 code: "VALIDATION_ERROR"
 
     "409":
-      description: Email sudah terdaftar
+      description: Email already registered
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: ../../schemas/ErrorResponse.yaml#/ErrorResponse
           examples:
             emailAlreadyRegistered:
-              summary: Email sudah digunakan
+              summary: Email already registered
               value:
-                message: "Email sudah terdaftar. gunakan email lain atau login"
+                message: "Email already registered. use a different email or login"
                 code: "EMAIL_ALREADY_EXISTS"
 
     "500":
@@ -72,10 +68,10 @@ post:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/ErrorResponse'
+            $ref: ../../schemas/ErrorResponse.yaml#/ErrorResponse
           examples:
             internalError:
-              summary: Kesalahan server internal
+              summary: Internal server error
               value:
-                message: "Terjadi kesalahan pada server. Silakan coba lagi nanti"
+                message: "An error occurred on the server. Please try again later"
                 code: "INTERNAL_SERVER_ERROR"

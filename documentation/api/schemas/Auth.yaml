@@ -1,7 +1,7 @@
 LoginRequest:
   type: object
   additionalProperties: false
-  description: Payload untuk login (email + password).
+  description: Payload for login (email + password).
   required:
     - email
     - password
@@ -9,19 +9,19 @@ LoginRequest:
     email:
       type: string
       format: email
-      description: Email terdaftar.
+      description: Registered email.
       example: "user@example.com"
     password:
       type: string
       format: password
-      description: Password plaintext dari client.
+      description: Password plaintext from client.
       minLength: 1
       example: "P@ssw0rd123"
 
 LoginResponse:
   type: object
   additionalProperties: false
-  description: Response ketika login berhasil
+  description: Response when login is successful
   required:
     - message
     - code
@@ -29,23 +29,22 @@ LoginResponse:
   properties:
     message:
       type: string
-      description: Pesan hasil login
+      description: Login successful message
       example: "Login successful"
 
     code:
       type: string
-      description: Kode status aplikasi
+      description: Application status code
       example: "LOGIN_SUCCESS"
 
     data:
-      $ref: ./Auth.yaml#/AuthSuccessData
+      $ref: ./AuthSuccessData.yaml#/AuthSuccessData
 
 
 AuthSuccessData:
   type: object
   additionalProperties: false
-  description: |
-    Data setelah autentikasi sukses (login/register).
+  description: Data after successful authentication (login/register).
   required:
     - user
     - token
@@ -56,12 +55,12 @@ AuthSuccessData:
 
     token:
       type: string
-      description: JWT Bearer token untuk Authorization header.
+      description: JWT Bearer token for Authorization header.
       example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
 
     expiresIn:
       type: integer
-      description: Masa berlaku token dalam detik.
+      description: Token expiration time in seconds.
       minimum: 1
       example: 3600
 
