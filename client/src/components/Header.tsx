@@ -3,6 +3,7 @@ import shopCo from "../assets/resources/shopCo.svg";
 import searchIcon from "../assets/resources/searchIcon.svg";
 import cart from "../assets/resources/cart.svg";
 import login from "../assets/resources/login.png";
+import { Link } from "react-router";
 
 
 function Header() {
@@ -10,7 +11,7 @@ function Header() {
     <>
       <section className="h-8.5 bg-black flex items-center justify-center">
         <p className="text-white text-xs flex items-center gap-3">
-          <span>Sign up and get 20% off to your first order. <span className="underline text-xs font-medium">Sign Up Now</span></span>
+          <span>Sign up and get 20% off to your first order. <Link to="/register" className="underline text-xs font-medium">Sign Up Now</Link></span>
         </p>
       </section>
 
