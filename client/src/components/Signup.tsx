@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { useState, type FormEvent } from "react";
-import { registerUser } from "../services/authService";
+import { registerUser } from "../services/auth.service";
 import type { RegisterPayload } from "../types/user";
 
 export function SignupForm({
