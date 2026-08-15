@@ -1,5 +1,6 @@
 // controllers/authController.test.ts
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { Request, Response } from 'express';
 import { register } from '../../controllers/auth.controller';
 import { registerUser, checkEmailExists } from '../../services/auth.service';
 
@@ -9,14 +10,19 @@ vi.mock('../../services/auth.service', () => ({
 }));
 
 function mockResponse() {
-  const res: any = {};
-  res.status = vi.fn().mockReturnValue(res);
-  res.json = vi.fn().mockReturnValue(res);
+  const res = {
+    status: vi.fn(),
+    json: vi.fn(),
+  } as unknown as Response;
+
+  vi.mocked(res.status).mockReturnValue(res);
+  vi.mocked(res.json).mockReturnValue(res);
+
   return res;
 }
 
-function mockRequest(body: any) {
-  return { body } as any;
+function mockRequest(body: unknown) {
+  return { body } as Request;
 }
 
 beforeEach(() => {
@@ -99,7 +105,8 @@ describe('POST /register', () => {
       name: 'Alex',
       email: 'alex@example.com',
       password: 'hashed-password-should-not-appear',
-    } as any);
+      createdAt: new Date(),
+    });
 
     const req = mockRequest({ name: 'Alex', email: 'alex@example.com', password: 'validpassword123' });
     const res = mockResponse();

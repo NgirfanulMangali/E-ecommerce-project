@@ -8,7 +8,7 @@ export async function getProducts(req: Request, res: Response) {
    return res.status(200).json({
     data: products,
   })
-  } catch (error) {
+  } catch{
     return res.status(500).json({
       message: "An internal server error occurred. Please try again later.",
       code: "INTERNAL_SERVER_ERROR",

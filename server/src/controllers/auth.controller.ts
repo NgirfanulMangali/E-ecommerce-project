@@ -55,13 +55,14 @@ export const register = async (
 
       const user= await registerUser(name,email,password);
 
-      const { password: _, ...safeUser } = user;
+      const safeUser = { ...user };
+      delete safeUser.password;
 
       return res.status(201).json({
         message:"Registration successful",
         data:safeUser,
       });
-   }catch(error){
+   }catch{
       return res.status(500).json({
         message:"An error occurred on the server. Please try again later",
         code:"INTERNAL_SERVER_ERROR",
@@ -129,7 +130,7 @@ export const login = async (
         }
       });
 
-   }catch(error){
+   }catch{
 
       return res.status(500)
       .json({
