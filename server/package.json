@@ -9,6 +9,7 @@
     "postinstall": "prisma generate --schema=src/prisma/schema.prisma",
     "start": "node dist/server.js",
     "test": "vitest",
+    "test:unit": "vitest run",
     "test:run": "vitest run",
     "test:integration": "dotenv -e .env.test -- vitest run src/tests/integration --pool=forks"
   },
