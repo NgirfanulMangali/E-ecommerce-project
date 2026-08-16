@@ -55,8 +55,7 @@ export const register = async (
 
       const user= await registerUser(name,email,password);
 
-      const safeUser = { ...user };
-      delete safeUser.password;
+      const { password: _password, ...safeUser } = user;
 
       return res.status(201).json({
         message:"Registration successful",
