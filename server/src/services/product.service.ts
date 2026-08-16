@@ -1,3 +1,4 @@
+import type { Product } from "../generated/prisma/client.js";
 import { prisma } from "../lib/prisma.js";
 
 const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL ?? "http://localhost:5000";
@@ -11,7 +12,7 @@ function toPublicImageUrl(imageUrl: string): string {
 export async function getAllProducts() {
     const products = await prisma.product.findMany();
 
-    return products.map((product: any) => ({
+    return products.map((product: Product) => ({
         ...product,
         price: Number(product.price),
         imageUrl: toPublicImageUrl(product.imageUrl),
