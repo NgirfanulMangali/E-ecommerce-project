@@ -55,11 +55,14 @@ export const register = async (
 
       const user= await registerUser(name,email,password);
 
-      const { password: _password, ...safeUser } = user;
-
       return res.status(201).json({
         message:"Registration successful",
-        data:safeUser,
+        data:{
+          id:user.id,
+          name:user.name,
+          email:user.email,
+          createdAt:user.createdAt,
+        },
       });
    }catch{
       return res.status(500).json({
