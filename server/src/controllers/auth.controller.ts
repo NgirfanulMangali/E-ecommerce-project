@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma";
+import { prisma } from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 
-import { registerUser, checkEmailExists } from "../services/auth.service";
+import { registerUser, checkEmailExists } from "../services/auth.service.js";
 
 export const register = async (
  req: Request,

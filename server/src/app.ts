@@ -2,8 +2,8 @@
 import path from "path";
 import cors from "cors";
 import express from "express";
-import productRoutes from "./routes/product.routes";
-import authRoutes from "./routes/auth.routes";
+import productRoutes from "./routes/product.routes.js";
+import authRoutes from "./routes/auth.routes.js";
 
 const app = express();
 app.use(cors());
