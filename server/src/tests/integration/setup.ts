@@ -4,17 +4,20 @@ import { execSync } from "child_process";
 import { config } from "dotenv";
 import { existsSync } from "fs";
 import path from "path";
+import { fileURLToPath } from "url";
+
+const setupDir = path.dirname(fileURLToPath(import.meta.url));
+const serverRoot = path.resolve(setupDir, "../../..");
 
 const envCandidates = [
-  path.resolve(process.cwd(), ".env.test"),
-  path.resolve(process.cwd(), "src/.env.test"),
-  path.resolve(__dirname, "../../.env.test"),
+  path.resolve(setupDir, "../../.env.test"),
+  path.resolve(serverRoot, ".env.test"),
+  path.resolve(serverRoot, "src/.env.test"),
 ];
 
 for (const envPath of envCandidates) {
   if (existsSync(envPath)) {
-    config({ path: envPath });
-    break;
+    config({ path: envPath, override: true, quiet: true });
   }
 }
 
@@ -27,7 +30,7 @@ if (!testDatabaseUrl) {
   );
 }
 
-// App code reads DATABASE_URL via lib/prisma.ts
+// App code and Prisma CLI both read DATABASE_URL
 process.env.DATABASE_URL = testDatabaseUrl;
 
 const adapter = new PrismaPg({ connectionString: testDatabaseUrl });
@@ -36,6 +39,7 @@ export const prisma = new PrismaClient({ adapter });
 
 export function runMigrations() {
   execSync("npx prisma migrate deploy --config=src/prisma.config.ts", {
+    cwd: serverRoot,
     env: { ...process.env, DATABASE_URL: testDatabaseUrl },
     stdio: "inherit",
   });

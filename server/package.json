@@ -11,9 +11,9 @@
     "start": "node dist/server.js",
     "lint": "eslint .",
     "test": "vitest",
-    "test:unit": "vitest run",
+    "test:unit": "vitest run src/tests/unit",
     "test:run": "vitest run",
-    "test:integration": "dotenv -e src/.env.test -- vitest run src/tests/integration --pool=forks"
+    "test:integration": "vitest run src/tests/integration --pool=forks"
   },
   "keywords": [],
   "author": "",
