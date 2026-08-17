@@ -13,7 +13,7 @@
     "test": "vitest",
     "test:unit": "vitest run",
     "test:run": "vitest run",
-    "test:integration": "dotenv -e .env.test -- vitest run src/tests/integration --pool=forks"
+    "test:integration": "dotenv -e src/.env.test -- vitest run src/tests/integration --pool=forks"
   },
   "keywords": [],
   "author": "",
