@@ -14,7 +14,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  lint:
+  Backend-lint:
     name: Lint & Typecheck
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -56,7 +56,7 @@ jobs:
         working-directory: server
         run: npm run build
 
-  unit-test:
+  Backend-unit-test:
     name: Unit Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -80,7 +80,7 @@ jobs:
         working-directory: server
         run: npm run test:unit
 
-  integration-test:
+  Backend-integration-test:
     name: Integration Test
     runs-on: ubuntu-latest
     timeout-minutes: 15
@@ -131,10 +131,10 @@ jobs:
         working-directory: server
         run: npm run test:integration
 
-  build:
+  Backend-build:
     name: Build
     runs-on: ubuntu-latest
-    needs: [lint, unit-test, integration-test]
+    needs: [Backend-lint, Backend-unit-test, Backend-integration-test]
     timeout-minutes: 10
 
     steps:
@@ -164,4 +164,105 @@ jobs:
 
       - name: Build server
         working-directory: server
+        run: npm run build
+
+  Frontend-lint:
+    name: Frontend Lint & Typecheck
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Run ESLint
+        working-directory: client
+        run: npm run lint
+
+      - name: Typecheck client
+        working-directory: client
+        run: npx tsc -b
+
+  Frontend-unit-test:
+    name: Frontend Unit Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Run unit tests
+        working-directory: client
+        run: npm run test:unit
+
+  Frontend-integration-test:
+    name: Frontend Integration Test
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Run integration tests
+        working-directory: client
+        run: npm run test:integration
+
+  Frontend-build:
+    name: Frontend Build
+    runs-on: ubuntu-latest
+    needs: [Frontend-lint, Frontend-unit-test, Frontend-integration-test]
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: client/package-lock.json
+
+      - name: Install client dependencies
+        working-directory: client
+        run: npm ci
+
+      - name: Build client
+        working-directory: client
         run: npm run build
