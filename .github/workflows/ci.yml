@@ -132,7 +132,7 @@ jobs:
         run: npm run test:integration
 
   Backend-build:
-    name: Build
+    name: Backend Build
     runs-on: ubuntu-latest
     needs: [Backend-lint, Backend-unit-test, Backend-integration-test]
     timeout-minutes: 10
