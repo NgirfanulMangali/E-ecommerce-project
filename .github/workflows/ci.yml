@@ -15,7 +15,7 @@ concurrency:
 
 jobs:
   Backend-lint:
-    name: Lint & Typecheck
+    name: Backend Lint & Typecheck
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -57,7 +57,7 @@ jobs:
         run: npm run build
 
   Backend-unit-test:
-    name: Unit Test
+    name: Backend Unit Test
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
@@ -81,7 +81,7 @@ jobs:
         run: npm run test:unit
 
   Backend-integration-test:
-    name: Integration Test
+    name: Backend Integration Test
     runs-on: ubuntu-latest
     timeout-minutes: 15
 
