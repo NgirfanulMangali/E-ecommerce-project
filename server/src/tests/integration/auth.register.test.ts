@@ -1,11 +1,7 @@
-import { beforeAll, afterEach, afterAll, describe, it, expect } from "vitest";
+import { afterEach, afterAll, describe, it, expect } from "vitest";
 import request from "supertest";
-import { prisma, runMigrations, clearDb } from "./setup";
+import { prisma, clearDb } from "./setup";
 import app from "../../app";
-
-beforeAll(() => {
-  runMigrations();
-}, 30000);
 
 afterEach(async () => {
   await clearDb();
