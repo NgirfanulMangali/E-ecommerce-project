@@ -9,10 +9,9 @@ type Props = {
       password: string;
     }>
   >;
-  setShowLoginForm: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function LoginForm({ formData, setFormData, setShowLoginForm }: Props) {
+function LoginForm({ formData, setFormData }: Props) {
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setFormData({
       ...formData,
@@ -41,7 +40,6 @@ function LoginForm({ formData, setFormData, setShowLoginForm }: Props) {
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.data));
 
-      setShowLoginForm(false);
     } else {
       alert(data.message ?? "Login gagal");
     }
@@ -85,7 +83,6 @@ function LoginForm({ formData, setFormData, setShowLoginForm }: Props) {
 
         <button
           type="button"
-          onClick={() => setShowLoginForm(false)}
           className="border px-4 py-2 rounded"
         >
           Tutup

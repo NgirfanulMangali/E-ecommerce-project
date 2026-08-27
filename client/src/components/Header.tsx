@@ -24,7 +24,7 @@ function Header() {
         <section className="flex">
           <img src={searchIcon} alt="search" className="mr-3" />
           <img src={cart} alt="cart" className="mr-3" />
-          <img src={login} alt="login" className="mr-3" />
+          <Link to="/login"><img src={login} alt="login" className="mr-3" /></Link>
          
           
         </section>
