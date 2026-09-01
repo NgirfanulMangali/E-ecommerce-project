@@ -11,6 +11,21 @@ export interface RegisterResponse {
   token: string;
 }
 
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export interface LoginResponse {
+  message: string;
+  token: string;
+  data: {
+    id: string;
+    name: string;
+    email: string;
+  };
+}
+
 export interface ApiError {
   message: string;
   statusCode?: number;
