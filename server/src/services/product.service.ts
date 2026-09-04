@@ -1,5 +1,5 @@
-import type { Product } from "../generated/prisma/client.js";
-import { prisma } from "../lib/prisma.js";
+import type { Product } from "../generated/prisma/client";
+import { prisma } from "../lib/prisma";
 
 const PUBLIC_BASE_URL = process.env.PUBLIC_BASE_URL ?? "http://localhost:5000";
 

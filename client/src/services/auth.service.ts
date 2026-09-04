@@ -5,7 +5,7 @@ import type {
   RegisterResponse,
 } from "../types/user";
 
-const BASE_URL = "http://localhost:5000"; // move to env var in real projects
+const BASE_URL = "http://localhost:5000"; 
 
 export async function registerUser(
   payload: RegisterPayload

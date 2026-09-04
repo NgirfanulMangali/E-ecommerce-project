@@ -1,9 +1,7 @@
 import { Request, Response } from "express";
-import { prisma } from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
-import bcrypt from "bcryptjs";
 
-import { registerUser, checkEmailExists } from "../services/auth.service.js";
+import { registerUser, checkEmailExists, loginUser } from "../services/auth.service.js";
 
 export const register = async (
  req: Request,
@@ -91,35 +89,25 @@ export const login = async (
           });
       }
 
-      const user=
-      await prisma.user.findUnique({
-         where:{
-             email
-         }
-      });
+      const user=await loginUser(email,password);
 
       if(!user){
-          return res.status(401)
-          .json({
-            message:"Email atau password salah"
-          });
-      }
+        return res.status(401).json({
+          message:"Email atau password salah"
+        });
+      }   
 
-      const isPasswordValid=
-      await bcrypt.compare(password,user.password);
-
-      if(!isPasswordValid){
-          return res.status(401)
-          .json({
-            message:"Email atau password salah"
-          });
-      }
-
-      const token=jwt.sign(
-         {id:user.id,email:user.email},
-         process.env.JWT_SECRET || "your-secret-key",
-         {expiresIn:"7d"}
+      const token = jwt.sign(
+        {
+          id: user.id,
+          email: user.email,
+        },
+        process.env.JWT_SECRET || "your-secret-key",
+        {
+          expiresIn: "7d",
+        }
       );
+  
 
       return res.status(200)
       .json({

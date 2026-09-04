@@ -1,11 +1,11 @@
-import { afterEach, afterAll, describe, it, expect } from "vitest";
+import { beforeEach, afterAll, describe, it, expect } from "vitest";
 import request from "supertest";
 import { prisma, clearDb } from "./setup";
 import app from "../../app";
 
-afterEach(async () => {
+beforeEach(async () => {
   await clearDb();
-});
+})
 
 afterAll(async () => {
   await prisma.$disconnect();
@@ -13,8 +13,8 @@ afterAll(async () => {
 
 describe("POST /auth/register", () => {
   const validUser = {
-    name: "Jane Doe",
-    email: "jane@example.com",
+    name: "Janette Doe",
+    email: "janette@example.com",
     password: "password123",
   };
 

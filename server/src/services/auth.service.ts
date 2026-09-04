@@ -23,3 +23,26 @@ export async function checkEmailExists(email: string) {
     });
     return userExist ? true : false;
 }   
+
+export async function loginUser(email: string, password: string) {
+    const user = await prisma.user.findUnique({
+      where: {
+        email,
+      },
+    });
+  
+    if (!user) {
+      return null;
+    }
+  
+    const isPasswordValid = await bcrypt.compare(
+      password,
+      user.password
+    );
+  
+    if (!isPasswordValid) {
+      return null;
+    }
+  
+    return user;
+  }

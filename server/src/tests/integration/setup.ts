@@ -7,42 +7,59 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const setupDir = path.dirname(fileURLToPath(import.meta.url));
+
 const serverRoot = path.resolve(setupDir, "../../..");
 
-const envCandidates = [
-  path.resolve(setupDir, "../../.env.test"),
-  path.resolve(serverRoot, ".env.test"),
-  path.resolve(serverRoot, "src/.env.test"),
-];
+// Load server/.env.test
+const envPath = path.resolve(serverRoot, ".env.test");
 
-for (const envPath of envCandidates) {
-  if (existsSync(envPath)) {
-    config({ path: envPath, override: true, quiet: true });
-  }
-}
-
-const testDatabaseUrl = process.env.TEST_DATABASE_URL ?? process.env.DATABASE_URL;
-
-if (!testDatabaseUrl) {
+if (!existsSync(envPath)) {
   throw new Error(
-    "TEST_DATABASE_URL or DATABASE_URL must be set for integration tests. " +
-      "Create server/src/.env.test or run: npm run test:integration",
+    "server/.env.test not found. Create it before running integration tests."
   );
 }
 
-// App code and Prisma CLI both read DATABASE_URL
-process.env.DATABASE_URL = testDatabaseUrl;
+config({
+  path: envPath,
+  override: true,
+  quiet: true,
+});
 
-const adapter = new PrismaPg({ connectionString: testDatabaseUrl });
+// Pooled connection for Prisma Clients
+const testDatabaseUrl = process.env.TEST_DATABASE_URL;
 
-export const prisma = new PrismaClient({ adapter });
 
+
+if (!testDatabaseUrl) {
+  throw new Error(
+    "TEST_DATABASE_URL must be set in server/.env.test."
+  );
+}
+
+
+// Prisma Client uses the test database
+const adapter = new PrismaPg({
+  connectionString: testDatabaseUrl,
+});
+
+export const prisma = new PrismaClient({
+  adapter,
+});
+
+// Prisma migrations use the direct connection
 export function runMigrations() {
-  execSync("npx prisma migrate deploy --config=src/prisma.config.ts", {
-    cwd: serverRoot,
-    env: { ...process.env, DATABASE_URL: testDatabaseUrl },
-    stdio: "inherit",
-  });
+  execSync(
+    "npx prisma migrate deploy --config=src/prisma.config.ts",
+    {
+      cwd: serverRoot,
+      env: {
+        ...process.env, PRISMA_SCHEMA_DISABLE_ADVISORY_LOCK: "true",
+
+        DATABASE_URL: testDatabaseUrl,
+      },
+      stdio: "inherit",
+    }
+  );
 }
 
 export async function clearDb() {
