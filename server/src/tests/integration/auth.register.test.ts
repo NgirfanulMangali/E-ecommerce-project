@@ -13,8 +13,8 @@ afterAll(async () => {
 
 describe("POST /auth/register", () => {
   const validUser = {
-    name: "Janette Doe",
-    email: "janette@example.com",
+    name: "Jono Doe",
+    email: "jono@example.com",
     password: "password123",
   };
 

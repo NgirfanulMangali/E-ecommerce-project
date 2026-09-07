@@ -14,4 +14,4 @@ export async function getProducts(req: Request, res: Response) {
       code: "INTERNAL_SERVER_ERROR",
     });
   }
-}
+} 
