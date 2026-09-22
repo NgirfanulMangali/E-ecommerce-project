@@ -52,7 +52,7 @@ function NewArrivals() {
               key={product.id}
               product={product}
               type="NEW_ARRIVAL"
-             />
+            />
           ))}
         </div>
 

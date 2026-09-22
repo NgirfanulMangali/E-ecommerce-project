@@ -23,6 +23,7 @@ describe("getProductById", () => {
       description: "A test product",
       price: { toString: () => "99.99" } as any, // simulate Prisma Decimal
       stock: 10,
+      imageUrl: "https://example.com/images/test.jpg",
     };
 
     // Prisma Decimal supports Number() conversion; mock accordingly
@@ -39,6 +40,7 @@ describe("getProductById", () => {
     expect(result).toEqual({
       ...mockProduct,
       price: 99.99,
+      imageUrl: "http://localhost:5000/images/test.jpg",
     });
     expect(typeof result?.price).toBe("number");
   });
@@ -60,6 +62,7 @@ describe("getProductById", () => {
       name: "Decimal Product",
       price: "150.5", // Prisma Decimal often serializes as string-like
       stock: 5,
+      imageUrl: "https://example.com/no-images-segment.jpg",
     });
 
     const result = await getProductById("prod-2");

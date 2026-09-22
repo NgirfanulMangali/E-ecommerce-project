@@ -12,3 +12,4 @@ export interface ProductDetail {
   createdAt: Date;
   updatedAt: Date;
 }
+ 

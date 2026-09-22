@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import type { Product, ProductType } from "../types/product";
 
 type ProductCardProps = {
@@ -14,24 +15,25 @@ const formatUSD = (value: number) =>
 
 function ProductCard({ product }: ProductCardProps) {
   return (
-    <article>
-      <div className="bg-[#F0EEED] rounded-[14px] px-3 py-4 h-[180px] sm:h-[220px] flex items-center justify-center">
-        <img
-          src={product.imageUrl}
-          alt={product.name}
-          className="max-h-full object-contain"
-        />
-      </div>
+    <Link to={`/Productdetail/${product.id}`} className="block">
+      <article>
+        <div className="bg-[#F0EEED] rounded-[14px] px-3 py-4 h-[180px] sm:h-[220px] flex items-center justify-center">
+          <img
+            src={product.imageUrl}
+            alt={product.name}
+            className="max-h-full object-contain"
+          />
+        </div>
 
-      <h3 className="mt-3 font-satoshi font-semibold text-[12px] leading-[16px] sm:text-[18px] sm:leading-[24px]">
-        {product.name}
-      </h3>
+        <h3 className="mt-3 font-satoshi font-semibold text-[12px] leading-[16px] sm:text-[18px] sm:leading-[24px]">
+          {product.name}
+        </h3>
 
-      <p className="mt-1 font-satoshi font-bold text-[24px] leading-[30px]">
-        {formatUSD(product.price)}
-      </p>
-    </article>
-    
+        <p className="mt-1 font-satoshi font-bold text-[24px] leading-[30px]">
+          {formatUSD(product.price)}
+        </p>
+      </article>
+    </Link>
   );
 }
 
