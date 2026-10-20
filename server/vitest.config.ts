@@ -11,6 +11,10 @@ if (testEnv.TEST_DATABASE_URL && !testEnv.DATABASE_URL) {
   testEnv.DATABASE_URL = testEnv.TEST_DATABASE_URL;
 }
 
+if (!testEnv.JWT_SECRET) {
+  testEnv.JWT_SECRET = "test-jwt-secret";
+}
+
 export default defineConfig({
   root: serverRoot,
   envDir,

@@ -63,6 +63,8 @@ export function runMigrations() {
 }
 
 export async function clearDb() {
+  await prisma.cartItem.deleteMany();
+  await prisma.cart.deleteMany();
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
   await prisma.user.deleteMany();
