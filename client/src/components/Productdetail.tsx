@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import { ChevronRight, Minus, Plus, ShoppingBag, Check } from "lucide-react";
 import type { ColorOption, SizeOption, ProductDetail as ProductDetailType } from "../types/Product.type";
 import { productService, ApiError } from "../services/Productdetail.service";
+import { useCart } from "../contexts/CartContext";
 
 // UI-only until the backend exposes real variants — see types/product.type.ts
 const COLORS: ColorOption[] = [
@@ -31,10 +32,32 @@ export function ProductDetail({ productId }: ProductDetailProps) {
   const [product, setProduct] = useState<ProductDetailType | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-
   const [selectedColor, setSelectedColor] = useState<string>(COLORS[0].id);
   const [selectedSize, setSelectedSize] = useState<string>(SIZES[2].id);
   const [quantity, setQuantity] = useState<number>(1);
+
+
+  const { addToCart, loading } = useCart();
+  const [cartMessage, setCartMessage] = useState("");
+  const [cartError, setCartError] = useState("");
+
+  async function handleAddToCart() {
+    if (!product) return;
+
+    setCartMessage("");
+    setCartError("");
+
+    try {
+      await addToCart(product.id, quantity);
+      setCartMessage("Product added to cart!");
+    } catch (error) {
+      setCartError(
+        error instanceof Error
+          ? error.message
+          : "Failed to add product to cart",
+      );
+    }
+  }
 
   useEffect(() => {
     const controller = new AbortController();
@@ -211,12 +234,29 @@ export function ProductDetail({ productId }: ProductDetailProps) {
           </div>
 
           <button
-            disabled={isOutOfStock}
+            type="button"
+            disabled={isOutOfStock || loading}
+            onClick={handleAddToCart}
             className="flex-1 flex items-center justify-center gap-2 bg-neutral-900 text-white rounded-full py-3.5 text-sm font-semibold hover:bg-neutral-800 transition-colors disabled:bg-neutral-300 disabled:cursor-not-allowed"
           >
             <ShoppingBag size={16} />
-            {isOutOfStock ? "Out of Stock" : "Add to Cart"}
+            {isOutOfStock
+              ? "Out of Stock"
+              : loading
+                ? "Adding..."
+                : "Add to Cart"}
           </button>
+          {cartMessage && (
+            <p role="status" className="mt-2 text-sm text-green-700">
+              {cartMessage}
+            </p>
+          )}
+
+          {cartError && (
+            <p role="alert" className="mt-2 text-sm text-red-600">
+              {cartError}
+            </p>
+          )}
         </div>
       </div>
     </div>
