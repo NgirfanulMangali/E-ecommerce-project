@@ -25,7 +25,7 @@ async function requestCart(
     },
   });
 
-  const body = (await response.json()) as CartResponse;
+  const body = (await response.json().catch(() => ({}))) as Partial<CartResponse>;
 
   if (!response.ok) {
     throw new Error(
@@ -33,7 +33,7 @@ async function requestCart(
     );
   }
 
-  return body.data;
+  return body.data as Cart;
 }
 
 export const cartService = {

@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router";
 import {
   ArrowRight,
-  ChevronRight,
+  ChevronRight, 
   ShoppingBag,
 } from "lucide-react";
 
