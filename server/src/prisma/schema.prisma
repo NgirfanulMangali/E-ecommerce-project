@@ -90,7 +90,7 @@ model CartItem {
 model Order {
   id              String   @id @default(cuid())
   status          OrderStatus @default(PENDING)
-
+  createdAt DateTime    @default(now())
 
 
   @@map("orders")
