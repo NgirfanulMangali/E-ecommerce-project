@@ -49,7 +49,7 @@ export const prisma = new PrismaClient({
 // Prisma migrations use the direct connection
 export function runMigrations() {
   execSync(
-    "npx prisma migrate deploy --config=src/prisma.config.ts",
+    "npx prisma migrate deploy --config=prisma.config.ts",
     {
       cwd: serverRoot,
       env: {
@@ -68,4 +68,5 @@ export async function clearDb() {
   await prisma.product.deleteMany();
   await prisma.category.deleteMany();
   await prisma.user.deleteMany();
+  await prisma.order.deleteMany();
 }
