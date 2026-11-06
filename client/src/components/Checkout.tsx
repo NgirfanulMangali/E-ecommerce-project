@@ -2,31 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { ArrowLeft, MapPin, CreditCard } from "lucide-react";
 
-interface ShippingAddress {
-  id: string;
-  label: string;
-  isDefault: boolean;
-  recipient: string;
-  street: string;
-  city: string;
-  phone: string;
-}
-
-interface PaymentMethod {
-  id: string;
-  brand: string;
-  last4: string;
-  isDefault: boolean;
-}
-
-interface OrderItem {
-  id: string;
-  name: string;
-  size: string;
-  price: number;
-  quantity: number;
-  imageUrl: string;
-}
+import type { ShippingAddress, PaymentMethod, OrderItem } from "../types/Checkout";
 
 // Data sementara — ganti dengan data dari backend/service/cart kamu
 const ADDRESS: ShippingAddress = {
