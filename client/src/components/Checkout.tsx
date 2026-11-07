@@ -111,7 +111,7 @@ export function Checkout() {
         {/* Header */}
         <header className="flex items-center gap-4 px-5 pt-5 pb-4">
           <button
-            onClick={() => navigate(-1)}
+            onClick={() => navigate("/cart")}
             aria-label="Go back"
             className="text-neutral-900"
           >
