@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { useNavigate } from "react-router";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router";
 import { ArrowLeft, MapPin, CreditCard } from "lucide-react";
 
-import type { ShippingAddress, PaymentMethod, OrderItem } from "../types/Checkout";
+import { cartService } from "../services/cart.service";
+import type { Cart } from "../types/cart";
+import type { ShippingAddress, PaymentMethod } from "../types/Checkout";
 
-// Data sementara — ganti dengan data dari backend/service/cart kamu
+// Data sementara — ganti dengan data dari backend nanti
 const ADDRESS: ShippingAddress = {
   id: "addr-1",
   label: "Home",
@@ -21,36 +23,6 @@ const PAYMENT: PaymentMethod = {
   last4: "4242",
   isDefault: true,
 };
-
-const ITEMS: OrderItem[] = [
-  {
-    id: "1",
-    name: "Air Force 1 GORE-TEX Vibram",
-    size: "9",
-    price: 150,
-    quantity: 2,
-    imageUrl:
-      "https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?w=200&h=200&fit=crop",
-  },
-  {
-    id: "2",
-    name: "Nike Dunk Low Retro SE",
-    size: "10",
-    price: 120,
-    quantity: 1,
-    imageUrl:
-      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=200&h=200&fit=crop",
-  },
-  {
-    id: "3",
-    name: "Air Jordan 1 Low SE",
-    size: "8",
-    price: 130,
-    quantity: 1,
-    imageUrl:
-      "https://images.unsplash.com/photo-1552346154-21d32810aba3?w=200&h=200&fit=crop",
-  },
-];
 
 const SHIPPING_FEE = 10;
 
@@ -92,18 +64,84 @@ export function Checkout() {
   const navigate = useNavigate();
   const [isPlacing, setIsPlacing] = useState(false);
 
-  const subtotal = ITEMS.reduce((sum, i) => sum + i.price * i.quantity, 0);
-  const total = subtotal + SHIPPING_FEE;
+  const [cart, setCart] = useState<Cart | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  // Ambil data keranjang dari server saat halaman checkout dibuka
+  useEffect(() => {
+    let active = true;
+
+    async function loadCart() {
+      try {
+        const result = await cartService.getCart();
+        if (active) setCart(result);
+      } catch (err) {
+        if (active) {
+          setError(
+            err instanceof Error ? err.message : "Failed to load your cart.",
+          );
+        }
+      } finally {
+        if (active) setIsLoading(false);
+      }
+    }
+
+    void loadCart();
+
+    return () => {
+      active = false;
+    };
+  }, []);
+
+  const items = cart?.items ?? [];
+  const subtotal = cart?.totalPrice ?? 0;
+  const total = items.length > 0 ? subtotal + SHIPPING_FEE : 0;
 
   const handlePlaceOrder = async () => {
     setIsPlacing(true);
     try {
-      // TODO: panggil service order, mis. orderService.create({ items, addressId, paymentId })
+      // TODO: panggil service order, mis. orderService.create({ addressId, paymentId })
       await new Promise((resolve) => setTimeout(resolve, 800));
     } finally {
       setIsPlacing(false);
     }
   };
+
+  if (isLoading) {
+    return (
+      <main className="min-h-screen bg-white px-5 py-10">
+        <p className="text-neutral-500">Loading your order...</p>
+      </main>
+    );
+  }
+
+  if (error) {
+    return (
+      <main className="min-h-screen bg-white px-5 py-10">
+        <p role="alert" className="text-sm text-red-600">
+          {error}
+        </p>
+        <Link to="/cart" className="mt-4 inline-block text-sm font-medium underline">
+          Back to cart
+        </Link>
+      </main>
+    );
+  }
+
+  if (items.length === 0) {
+    return (
+      <main className="min-h-screen bg-white px-5 py-10">
+        <p className="font-bold">Your cart is empty</p>
+        <Link
+          to="/products"
+          className="mt-4 inline-flex rounded-full bg-neutral-900 px-6 py-3 text-sm font-medium text-white"
+        >
+          Continue Shopping
+        </Link>
+      </main>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white">
@@ -167,31 +205,32 @@ export function Checkout() {
             </div>
           </section>
 
-          {/* Order items */}
+          {/* Order items — sekarang dari cart */}
           <section className="mt-6">
-            <SectionHeader title={`Order Items (${ITEMS.length})`} />
+            <SectionHeader title={`Order Items (${cart?.totalItems ?? items.length})`} />
             <ul className="flex flex-col gap-3">
-              {ITEMS.map((item) => (
+              {items.map((item) => (
                 <li
-                  key={item.id}
+                  key={item.productId}
                   className="flex items-center gap-3 bg-neutral-50 border border-neutral-100 rounded-2xl p-3"
                 >
                   <div className="w-16 h-16 shrink-0 rounded-xl overflow-hidden bg-neutral-100">
                     <img
-                      src={item.imageUrl}
-                      alt={item.name}
+                      src={item.product.imageUrl}
+                      alt={item.product.name}
                       className="w-full h-full object-cover"
+                      loading="lazy"
                     />
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="text-sm font-medium text-neutral-900 truncate">
-                      {item.name}
+                      {item.product.name}
                     </p>
                     <p className="text-xs text-neutral-500 mt-0.5">
-                      Size: {item.size}
+                      {currency.format(item.product.price)} each
                     </p>
                     <p className="text-sm font-semibold text-neutral-900 mt-1">
-                      {currency.format(item.price)}
+                      {currency.format(item.lineTotal)}
                     </p>
                   </div>
                   <span className="self-end text-xs text-neutral-500">
@@ -206,6 +245,14 @@ export function Checkout() {
         {/* Sticky footer */}
         <div className="fixed bottom-0 inset-x-0">
           <div className="w-full bg-white border-t border-neutral-100 px-5 pt-4 pb-[max(1.25rem,env(safe-area-inset-bottom))]">
+            <div className="flex items-center justify-between mb-1 text-sm text-neutral-500">
+              <span>Subtotal</span>
+              <span>{currency.format(subtotal)}</span>
+            </div>
+            <div className="flex items-center justify-between mb-2 text-sm text-neutral-500">
+              <span>Shipping</span>
+              <span>{currency.format(SHIPPING_FEE)}</span>
+            </div>
             <div className="flex items-center justify-between mb-3">
               <span className="text-sm font-medium text-neutral-900">Total</span>
               <span className="text-xl font-bold text-neutral-900">
