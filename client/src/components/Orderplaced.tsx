@@ -1,23 +1,22 @@
 import type { CSSProperties, ReactNode } from "react";
-import { Link } from "react-router";
+import type { ConfettiPiece } from "../types/Orderplaced";
 
+type OrderStatus = "PENDING" | "PAID" | "SHIPPED" | "COMPLETED" | "CANCELLED";
 
 type OrderPlacedProps = {
-  orderId: string;
-  estimatedDelivery: string;
+  order: { id: string; status: OrderStatus };
   onContinueShopping?: () => void;
   onTrackOrder?: () => void;
 };
 
-type ConfettiPiece = {
-  left: string;
-  top: string;
-  w: number;
-  h: number;
-  color: string;
-  rotate: number;
-  delay: number;
+const STATUS_LABEL: Record<OrderStatus, string> = {
+  PENDING: "Pending",
+  PAID: "Paid",
+  SHIPPED: "Shipped",
+  COMPLETED: "Completed",
+  CANCELLED: "Cancelled",
 };
+
 
 // Posisi confetti dibuat tetap supaya tampilan konsisten di setiap render.
 const CONFETTI: ConfettiPiece[] = [
@@ -115,8 +114,7 @@ function InfoRow({
 }
 
 export default function OrderPlaced({
-  orderId,
-  estimatedDelivery,
+  order,
   onContinueShopping,
   onTrackOrder,
 }: OrderPlacedProps) {
@@ -179,14 +177,13 @@ export default function OrderPlaced({
         </p>
 
         <div className="mt-8 w-full space-y-4 rounded-2xl border border-neutral-200 bg-neutral-100/70 p-4 text-left">
-          <InfoRow icon={<ReceiptIcon />} label="Order ID" value={orderId} />
-          <InfoRow icon={<TruckIcon />} label="Estimated Delivery" value={estimatedDelivery} />
+          <InfoRow icon={<ReceiptIcon />} label="Order ID" value={order.id} />
+          <InfoRow icon={<TruckIcon />} label="Status" value={STATUS_LABEL[order.status]} />
         </div>
       </section>
 
       {/* Tombol aksi menempel di bawah */}
       <div className="relative mt-auto space-y-3 pt-10">
-        <Link to="/">
         <button
           type="button"
           onClick={onContinueShopping}
@@ -194,7 +191,6 @@ export default function OrderPlaced({
         >
           Continue Shopping
         </button>
-        </Link>
         <button
           type="button"
           onClick={onTrackOrder}

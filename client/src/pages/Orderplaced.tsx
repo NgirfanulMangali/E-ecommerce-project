@@ -7,7 +7,7 @@ function OrderPlacedPage() {
   return (
     <div>
       <Header />
-      <OrderPlacedContent orderId="1234567890" estimatedDelivery="2028-11-11" />
+      <OrderPlacedContent order={{ id: "1234567890", status: "PENDING" }} />
       <Footer />
     </div>
   );
