@@ -1,4 +1,6 @@
 import type { CSSProperties, ReactNode } from "react";
+import { Link } from "react-router";
+
 
 type OrderPlacedProps = {
   orderId: string;
@@ -184,6 +186,7 @@ export default function OrderPlaced({
 
       {/* Tombol aksi menempel di bawah */}
       <div className="relative mt-auto space-y-3 pt-10">
+        <Link to="/">
         <button
           type="button"
           onClick={onContinueShopping}
@@ -191,6 +194,7 @@ export default function OrderPlaced({
         >
           Continue Shopping
         </button>
+        </Link>
         <button
           type="button"
           onClick={onTrackOrder}

@@ -7,6 +7,7 @@ import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
 import OrderPlaced from './pages/Orderplaced'
 
+
 function App() {
   return (
     <Routes>
