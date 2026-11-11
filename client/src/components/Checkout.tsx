@@ -259,13 +259,15 @@ export function Checkout() {
                 {currency.format(total)}
               </span>
             </div>
+            <Link to="/orderplaced">
             <button
               onClick={handlePlaceOrder}
               disabled={isPlacing}
               className="w-full bg-neutral-900 text-white rounded-full py-3.5 text-sm font-semibold hover:bg-neutral-800 transition-colors disabled:bg-neutral-400"
             >
-              {isPlacing ? "Placing order..." : "Place Order"}
-            </button>
+                {isPlacing ? "Placing order..." : "Place Order"}
+              </button>
+            </Link>
           </div>
         </div>
       </div>

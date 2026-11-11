@@ -5,6 +5,7 @@ import Login from './pages/Login'
 import Productdetail from './pages/Productdetail'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
+import OrderPlaced from './pages/Orderplaced'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Route path="/Productdetail" element={<Productdetail />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
+      <Route path="/orderplaced" element={<OrderPlaced />} />
     </Routes>
   );
 }
