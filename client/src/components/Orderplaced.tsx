@@ -1,7 +1,7 @@
 import type { CSSProperties, ReactNode } from "react";
-import type { ConfettiPiece } from "../types/Orderplaced";
+import type { ConfettiPiece, OrderStatus } from "../types/Orderplaced";
+import { Link } from "react-router";
 
-type OrderStatus = "PENDING" | "PAID" | "SHIPPED" | "COMPLETED" | "CANCELLED";
 
 type OrderPlacedProps = {
   order: { id: string; status: OrderStatus };
@@ -184,13 +184,13 @@ export default function OrderPlaced({
 
       {/* Tombol aksi menempel di bawah */}
       <div className="relative mt-auto space-y-3 pt-10">
-        <button
+        <Link to="/"><button
           type="button"
           onClick={onContinueShopping}
           className="w-full rounded-xl bg-black py-3.5 text-sm font-semibold text-white transition active:scale-[0.99] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
         >
           Continue Shopping
-        </button>
+        </button></Link>
         <button
           type="button"
           onClick={onTrackOrder}

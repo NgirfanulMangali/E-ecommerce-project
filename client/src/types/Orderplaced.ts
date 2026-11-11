@@ -10,3 +10,4 @@ export interface ConfettiPiece {
     delay: number;
   };
 
+export type OrderStatus = "PENDING" | "PAID" | "SHIPPED" | "COMPLETED" | "CANCELLED";
