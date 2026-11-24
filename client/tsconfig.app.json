@@ -30,4 +30,5 @@
     }
   },
   "include": ["src"],
+  "exclude": ["src/playwright.config.ts", "src/E2E"]
 }
